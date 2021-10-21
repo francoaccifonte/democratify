@@ -1,7 +1,5 @@
 import SongListElement from './song_list_element';
 import { Draggable } from 'react-beautiful-dnd'
-import Row from 'react-bootstrap/Row'
-
 
 type songListProps = {
   rowNumber: number;
