@@ -1,5 +1,7 @@
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../features/root_reducer'
 
 type songListProps = {
   rowNumber: number;
@@ -7,11 +9,13 @@ type songListProps = {
 }
 
 const SongListElement = ({ rowNumber, data }: songListProps): JSX.Element => {
-    let color: string = rowNumber === 0
-      ? "bg-primary"
-      : rowNumber <=3
-        ? "bg-success"
-        : "bg-secondary"
+  const candidatePool = useSelector((state: RootState) => state.currentPlaylist.candidatePoolSize)
+
+  let color: string = rowNumber === 0
+    ? "bg-primary"
+    : rowNumber <= candidatePool
+      ? "bg-success"
+      : "bg-secondary"
 
   return(
     <>
