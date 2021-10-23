@@ -8,10 +8,26 @@ import Col from 'react-bootstrap/Col'
 
 import Player from "./components/player";
 import SongList from "./components/song_list";
+import PlaylistModel from "../backend/models/playlist_model"
+import { useDispatch } from 'react-redux'
+import { parseFromBackend } from '../features/slices/current_playlist_slice'
+import { useEffect, useMemo } from "react"
 
 type TParams = { id: string };
 
 const PlaylistView = ({ match }: RouteComponentProps<TParams>) => {
+  const dispatch = useDispatch();
+  var playlist: any = new PlaylistModel();
+
+  // This is just a hack to get the playlist from the backend without a thunk. Remove it when the backend is working.
+  const memoizedValue = useMemo(
+    () => {
+      return(playlist.show(25))
+    }, [25]);
+
+  useEffect(() => {
+    dispatch(parseFromBackend(memoizedValue));
+  }, [dispatch, memoizedValue]);
 
   const containerStyle: CSS.Properties = {
     height: "100vh"
@@ -25,7 +41,7 @@ const PlaylistView = ({ match }: RouteComponentProps<TParams>) => {
             <Player />
           </Col>
           <Col sm={10}>
-            <SongList />
+            <SongList/>
           </Col>
         </Row>
       </Container>
