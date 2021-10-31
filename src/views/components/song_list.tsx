@@ -35,8 +35,8 @@ const SongList = () => {
 
   const renderListHeader = () => {
     return(
-      <Row className="px-2">
-        <Col xs={6} sm={4}>Song</Col>
+      <Row className="px-2 pt-2">
+        <Col xs={6} sm={4}>Title</Col>
         <Col xs={6} sm={4}>Artist</Col>
         <Col sm={4} className="d-none d-sm-block">Album</Col>
       </Row>
