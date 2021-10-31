@@ -40,13 +40,6 @@ const Player = () => {
         </ButtonGroup>
       </Container>
 
-      <Button 
-        // onClick={() => logInSpotify()}
-        href={loginURI}
-        target="_blank"
-      >
-        Login Spotify
-      </Button>
       <SpotifyLoginButton />
     </div>
     )
