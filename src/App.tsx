@@ -1,17 +1,38 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import PlaylistView from './views/playlist_view';
 import LoginView from './views/login_view';
 import PlaylistSelectionView from './views/playlist_selection_view';
 
+import { RootState } from './features/root_reducer'
+import { useSelector } from 'react-redux';
+
 function App() {
+  const token =  useSelector((state: RootState) => state.account.token);
+  const loggedIn = ():boolean => {
+    return !!token;
+  }
+
+  // TODO: no idea how to type this
+  const redirectIfNotLoggedIn = (path: string, View: any) => {
+    return(
+      <Route exact path={path}>
+        {loggedIn() ? <View /> : <Redirect to="/"/>}
+      </Route>
+    )
+  }
+
+  console.log(typeof PlaylistSelectionView)
+
   return(
     <Router>
       <Switch>
-        <Route exact path="/" component={LoginView} />
-        <Route exact path="/playlists" component={PlaylistSelectionView} />
-        <Route exact path="/playlists/:id" component={PlaylistView} />
+        <Route exact path="/">
+          {loggedIn() ? <Redirect to="/playlists"/> : <LoginView />}
+        </Route>
+        {redirectIfNotLoggedIn('/playlists', PlaylistSelectionView)}
+        {redirectIfNotLoggedIn("/playlists/:id", PlaylistView)}
       </Switch>
     </Router>
   )
