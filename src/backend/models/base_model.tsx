@@ -1,8 +1,10 @@
 export default abstract class BaseModel {
   baseUrl: string;
+  token: string | undefined;
 
-  constructor() {
-    this.baseUrl  = 'http://localhost:3001'
+  constructor(token?: string) {
+    this.baseUrl  = 'http://localhost:3001';
+    this.token = token;
   }
 
   url(): string {
@@ -13,6 +15,17 @@ export default abstract class BaseModel {
     throw new Error('Model name not specified')
   }
 
+  baseHeaders(): object {
+    var headers: object = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
+    if (this.token) {
+      headers = {...headers, Authentication: `Bearer ${this.token}`}
+    }
+    return headers;
+    }
+
   show (id: number) {
     return this.get(`${this.url()}/${id}`)
   }
@@ -22,16 +35,15 @@ export default abstract class BaseModel {
   }
 
   post (path: string = '', body: object = {}) {
+    var options: object = {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    }
+    options = {...options, headers: this.baseHeaders()}
     return fetch(
       `${this.url()}${path}`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      }
+      options
     )
   }
 
@@ -43,16 +55,15 @@ export default abstract class BaseModel {
         url.searchParams.append(key, params[key])
       }
     }
-    
+
+    var options: object = {
+      method: 'GET',
+      mode: 'cors',
+    }
+    options = {...options, headers: this.baseHeaders()}
     return fetch(
       url.toString(),
-      {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+      options
     )
   }
 }

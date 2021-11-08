@@ -6,4 +6,4 @@ class PlaylistModel extends BaseModel {
   }
 }
 
-export default PlaylistModel
+export { PlaylistModel }

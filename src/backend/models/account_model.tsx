@@ -23,4 +23,4 @@ class AccountModel extends BaseModel {
   }
 }
 
-export default AccountModel
+export { AccountModel }

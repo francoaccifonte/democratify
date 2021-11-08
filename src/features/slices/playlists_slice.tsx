@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 
-import PlaylistModel from '../../backend/models/playlist_model'
+import Client from '../../backend/models/'
 
 export const fetchPlaylists = createAsyncThunk('playlists/list',
-  async (data: object = {}, thunkApi) => {
-    const client = new PlaylistModel();
-    return client.list();
+  async (data: object = {}, thunkApi: any) => {
+    const token: any = thunkApi.getState().account.token
+    const client = new Client(token);
+    return client.playlists.list();
 })
 
 type Playlist = {
@@ -38,8 +39,6 @@ export const playlistsSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchPlaylists.fulfilled, (state, action) => {
       state.status = 'fulfilled';
-      console.log(action.payload);
-      // state.count = action.payloasd;
     })
     .addCase(fetchPlaylists.rejected, (state, action) => {
       state.status = 'rejected';

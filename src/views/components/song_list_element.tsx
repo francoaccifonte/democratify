@@ -2,7 +2,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../features/root_reducer'
-import Song from '../../backend/models/song_model'
+import { Song } from '../../backend/models/song_model'
 
 type songListProps = {
   rowNumber: number;

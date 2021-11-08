@@ -1,5 +1,6 @@
-// define a type for the song model without using interfaces
-type Song ={
+import BaseModel from './base_model';
+
+export type Song ={
   id: number;
   title: string;
   artist: string;
@@ -8,4 +9,10 @@ type Song ={
   genre?: string;
 }
 
-export default Song
+class SongModel extends BaseModel {
+  modelName(): string {
+    return 'Song';
+  }
+}
+
+export { SongModel }
