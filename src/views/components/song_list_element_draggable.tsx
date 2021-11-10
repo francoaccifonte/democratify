@@ -1,6 +1,6 @@
 import SongListElement from './song_list_element';
 import { Draggable } from 'react-beautiful-dnd'
-import { Song } from '../../backend/models/song_model'
+import { Song } from '../../types/song'
 
 type songListProps = {
 rowNumber: number;

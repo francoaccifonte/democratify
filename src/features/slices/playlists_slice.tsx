@@ -7,7 +7,8 @@ export const fetchPlaylists = createAsyncThunk('playlists/list',
   async (data: object = {}, thunkApi: any) => {
     const token: any = thunkApi.getState().account.token
     const client = new Client(token);
-    return client.playlists.list();
+    const response = await client.playlists.list();
+    return response.json();
 })
 
 type PlaylistsState = {
@@ -25,7 +26,7 @@ const initialState: PlaylistsState = {
 }
 
 export const playlistsSlice = createSlice({
-  name: 'currentPlaylist',
+  name: 'availablePlaylists',
   initialState,
   reducers: {
     setCount: (state, action: PayloadAction<number>) => { state.count = action.payload },
@@ -33,6 +34,8 @@ export const playlistsSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchPlaylists.fulfilled, (state, action) => {
       state.status = 'fulfilled';
+      state.playlists = action.payload;
+      state.count = action.payload.length;
     })
     .addCase(fetchPlaylists.rejected, (state, action) => {
       state.status = 'rejected';

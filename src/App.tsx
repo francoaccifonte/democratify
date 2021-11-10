@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import PlaylistView from './views/playlist_view';
 import LoginView from './views/login_view';
-import PlaylistSelectionView from './views/playlist_selection_view';
+import PlaylistSelectionView from './views/playlist_selection/view';
 
 import { RootState } from './features/root_reducer'
 import { useSelector } from 'react-redux';
@@ -23,8 +23,6 @@ function App() {
     )
   }
 
-  console.log(typeof PlaylistSelectionView)
-
   return(
     <Router>
       <Switch>
@@ -32,7 +30,8 @@ function App() {
           {loggedIn() ? <Redirect to="/playlists"/> : <LoginView />}
         </Route>
         {redirectIfNotLoggedIn('/playlists', PlaylistSelectionView)}
-        {redirectIfNotLoggedIn("/playlists/:id", PlaylistView)}
+        {/* {redirectIfNotLoggedIn("/playlists/:id", PlaylistView)} */}
+        <Route exact path="/playlists/:id" component={PlaylistView} />
       </Switch>
     </Router>
   )
