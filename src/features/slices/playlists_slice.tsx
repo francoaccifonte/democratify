@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 
+import Playlist from '../../types/playlist'
 import Client from '../../backend/models/'
 
 export const fetchPlaylists = createAsyncThunk('playlists/list',
@@ -9,14 +10,7 @@ export const fetchPlaylists = createAsyncThunk('playlists/list',
     return client.playlists.list();
 })
 
-type Playlist = {
-  id: number
-  name: string
-  description: string,
-  external_url: string,
-}
-
-interface PlaylistsState {
+type PlaylistsState = {
   count: number,
   playlists: Playlist[],
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected',

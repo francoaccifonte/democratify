@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import Client from '../../backend/models/'
+import Account from '../../types/account'
 
 export const authenticate = createAsyncThunk('account/authenticate',
   async (data: { email: string, password: string }, thunkApi: any) => {
@@ -8,9 +9,7 @@ export const authenticate = createAsyncThunk('account/authenticate',
     return client.account.authenticate(data.email, data.password);
 })
 
-interface AccountState { // can be a type in stead of an interface ( so | could be used)
-  id: number | undefined,
-  token: string | undefined,
+type AccountState = Account & {
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected'
 }
 
