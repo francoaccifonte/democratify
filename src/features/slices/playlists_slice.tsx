@@ -15,14 +15,12 @@ type PlaylistsState = {
   count: number,
   playlists: Playlist[],
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected',
-  updated_at: Date,
 }
 
 const initialState: PlaylistsState = {
   count: 0,
   playlists: [],
   status: 'idle',
-  updated_at: new Date(1990, 1, 1, 0, 0, 0, 0),
 }
 
 export const playlistsSlice = createSlice({

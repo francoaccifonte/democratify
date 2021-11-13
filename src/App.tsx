@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import PlaylistView from './views/playlist_view';
 import LoginView from './views/login_view';
-import PlaylistSelectionView from './views/playlist_selection/view';
+import PlaylistSelectionView from './views/playlist_selection/playlist_selection_view';
 
 import { RootState } from './features/root_reducer'
 import { useSelector } from 'react-redux';
