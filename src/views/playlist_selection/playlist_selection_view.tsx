@@ -1,4 +1,3 @@
-import CSS from 'csstype';
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
@@ -7,7 +6,6 @@ import { RootState } from '../../features/root_reducer'
 
 import { List } from './index'
 
-import Container from 'react-bootstrap/Container'
 import SpotifyLoginButton from '../components/spotify_login_button'
 
 
