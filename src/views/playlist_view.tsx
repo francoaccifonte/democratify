@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 
 import Player from "./components/player";
 import SongList from "./components/song_list";
-import PlaylistModel from "../backend/models/playlist_model"
+import { PlaylistModel } from "../backend/models/playlist_model"
 import { useDispatch } from 'react-redux'
 import { parseFromBackend } from '../features/slices/current_playlist_slice'
 import { useEffect, useMemo } from "react"

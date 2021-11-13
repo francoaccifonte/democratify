@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import Song from '../../backend/models/song_model'
+import { Song } from '../../types/song'
 
 interface CurrentPlaylistState { // can be a type in stead of an interface ( so | could be used)
   id: number,

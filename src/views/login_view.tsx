@@ -66,7 +66,7 @@ const LoginView = () => {
     )
   };
 
-  if (accountId === -1) {
+  if (accountId === undefined) {
     return logInComponent()
   } else {
     return success()
