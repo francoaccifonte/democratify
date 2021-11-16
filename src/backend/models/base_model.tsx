@@ -21,7 +21,7 @@ export default abstract class BaseModel {
       'Accept': 'application/json',
     }
     if (this.token) {
-      headers = {...headers, Authentication: `Bearer ${this.token}`}
+      headers = {...headers, Authorization: `Bearer ${this.token}`}
     }
     return headers;
     }

@@ -1,5 +1,6 @@
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Image from 'react-bootstrap/Image'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../features/root_reducer'
 import { Song } from '../../types/song'
@@ -11,7 +12,6 @@ type songListProps = {
 
 const SongListElement = ({ rowNumber, data }: songListProps): JSX.Element => {
   const candidatePool = useSelector((state: RootState) => state.currentPlaylist.candidatePoolSize)
-
   let color: string = rowNumber === 0
     ? "bg-primary"
     : rowNumber <= candidatePool
@@ -20,9 +20,12 @@ const SongListElement = ({ rowNumber, data }: songListProps): JSX.Element => {
 
   return(
     <>
-      <Row className={`${color} my-2 px-2`}>
-        <Col xs={6} sm={4}>{`${data.title}`}</Col>
-        <Col xs={6} sm={4}>{`${data.artist}`}</Col>
+      <Row className={`${color} my-2 px-2 py-2`}>
+        <Col lg={1}>
+          <Image src={data.cover_art[2].url} alt="album art" roundedCircle/>
+        </Col>
+        <Col xs={4} sm={3}>{`${data.title}`}</Col>
+        <Col xs={4} sm={3}>{`${data.artist}`}</Col>
         <Col sm={4} className="d-none d-sm-block">{`${data.album}`}</Col>
       </Row>
     </>

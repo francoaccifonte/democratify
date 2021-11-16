@@ -5,4 +5,9 @@ export type Song ={
   album: string;
   year?: number;
   genre?: string;
+  cover_art: {
+    height: number;
+    width: number;
+    url: string;
+  }[]
 }

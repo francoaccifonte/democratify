@@ -1,7 +1,16 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { Song } from '../../types/song'
+import { Client } from '../../backend/models/client'
 
-interface CurrentPlaylistState { // can be a type in stead of an interface ( so | could be used)
+export const fetchOngoingPlaylist = createAsyncThunk('playlists/ongoing',
+  async (data: object = {}, thunkApi: any) => {
+    const token: any = thunkApi.getState().account.token
+    const client = new Client(token);
+    const response = await client.ongoingPlaylist.list();
+    return response.json();
+})
+
+interface CurrentPlaylistState {
   id: number,
   totalTracks: number,
   candidatePoolSize: number,
@@ -31,6 +40,12 @@ export const currentPlaylistSlice = createSlice({
       state.songs = action.payload;
     }
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchOngoingPlaylist.fulfilled, (state, action) => {
+      state.id = action.payload.id;
+      state.songs = action.payload.songs;
+    })
+  }
 })
 
 // Action creators are generated for each case reducer function

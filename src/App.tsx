@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import PlaylistView from './views/playlist_view';
+import OngoingPlaylistView from './views/ongoing_playlist/ongoing_playlist_view';
 import LoginView from './views/login_view';
 import PlaylistSelectionView from './views/playlist_selection/playlist_selection_view';
 
@@ -31,7 +31,7 @@ function App() {
         </Route>
         {redirectIfNotLoggedIn('/playlists', PlaylistSelectionView)}
         {/* {redirectIfNotLoggedIn("/playlists/:id", PlaylistView)} */}
-        <Route exact path="/playlists/:id" component={PlaylistView} />
+        <Route exact path="/playlists/ongoing" component={OngoingPlaylistView} />
       </Switch>
     </Router>
   )
