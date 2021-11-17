@@ -4,20 +4,18 @@ import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { RootState } from '../features/root_reducer'
-
 import { useSelector, useDispatch } from 'react-redux'
 import { authenticate } from '../features/slices/account_slice'
+import { RootState } from '../features/root_reducer'
 
 const LoginView = () => {
   const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const accountId = useSelector((state: RootState) => state.account.id)
-
   const handleLogIn = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    dispatch(authenticate({email: email, password: password})) 
+    dispatch(authenticate({email: email, password: password}))
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,5 @@
 import BaseModel from './base_model'
+import Account from '../../types/account'
 
 class AccountModel extends BaseModel {
   modelName(): string {
@@ -6,10 +7,10 @@ class AccountModel extends BaseModel {
   }
 
   // TODO: properly type this
-  async show(id: number) {
-    const account: any = await this.show(id)
+  async me(): Promise<any> {
+    const response = await this.get("/me")
 
-    return account
+    return response.json()
   }
 
   async authenticate(email: string, password: string): Promise<any> {
