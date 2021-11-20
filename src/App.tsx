@@ -16,7 +16,6 @@ function App() {
   const loggedIn = auth.loggedIn;
   // const token =  useSelector((state: RootState) => state.account.token);
 
-
   // TODO: no idea how to type this
   const redirectIfNotLoggedIn = (path: string, View: any) => {
     return(
@@ -33,7 +32,7 @@ function App() {
           <Route exact path="/">
             {loggedIn ? <Redirect to="/playlists"/> : <LoginView />}
           </Route>
-          {redirectIfNotLoggedIn('/playlists', PlaylistSelectionView)}
+          <Route exact path="/playlists" component={PlaylistSelectionView} />
           {/* {redirectIfNotLoggedIn("/playlists/:id", PlaylistView)} */}
           <Route exact path="/playlists/ongoing" component={OngoingPlaylistView} />
         </Switch>
