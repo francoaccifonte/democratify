@@ -1,43 +1,42 @@
 import React from 'react';
-import './App.css';
-
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { RootState } from './features/root_reducer'
+import { useSelector, useDispatch } from 'react-redux';
+
+import './App.css';
 import OngoingPlaylistView from './views/ongoing_playlist/ongoing_playlist_view';
 import LoginView from './views/login_view';
 import PlaylistSelectionView from './views/playlist_selection/playlist_selection_view';
-import { ProvideAuth, useAuth } from './hooks/useAuth'
-
-import { RootState } from './features/root_reducer'
-import { useSelector } from 'react-redux';
+import client from './backend/models/'
+import { authenticate } from './features/slices/account_slice'
 
 function App() {
-  const auth = useAuth();
-  const token = auth.token;
-  const loggedIn = auth.loggedIn;
-  // const token =  useSelector((state: RootState) => state.account.token);
+  let { token, id } = useSelector((state: RootState) => state.account)
+  const dispatch = useDispatch();
 
-  // TODO: no idea how to type this
-  const redirectIfNotLoggedIn = (path: string, View: any) => {
-    return(
-      <Route exact path={path}>
-        {loggedIn ? <View /> : <Redirect to="/"/>}
-      </Route>
-    )
+  // TODO: Move elsewhere this logic, and remove the useAuth file, or fix it so it goes there.
+  if (!client.token) {
+    if (!token) {
+      token = localStorage.getItem("account_token") || undefined;
+    }
+    if (token) {
+      client.setToken(token);
+    }
+  }
+  const loggedIn = !!token
+
+  if (loggedIn && !id) {
+    dispatch(authenticate({token: token}))
   }
 
   return(
-    <ProvideAuth>
       <Router>
         <Switch>
-          <Route exact path="/">
-            {loggedIn ? <Redirect to="/playlists"/> : <LoginView />}
-          </Route>
+          <Route exact path="/" component={LoginView} />
           <Route exact path="/playlists" component={PlaylistSelectionView} />
-          {/* {redirectIfNotLoggedIn("/playlists/:id", PlaylistView)} */}
           <Route exact path="/playlists/ongoing" component={OngoingPlaylistView} />
         </Switch>
       </Router>
-    </ProvideAuth>
   )
 }
 

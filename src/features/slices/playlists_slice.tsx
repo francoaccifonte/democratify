@@ -1,12 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 
 import Playlist from '../../types/playlist'
-import Client from '../../backend/models/'
+import client from '../../backend/models/'
 
 export const fetchPlaylists = createAsyncThunk('playlists/list',
   async (data: object = {}, thunkApi: any) => {
-    const token: any = thunkApi.getState().account.token
-    const client = new Client(token);
     const response = await client.playlists.list();
     return response.json();
 })

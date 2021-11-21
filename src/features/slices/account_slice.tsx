@@ -2,17 +2,16 @@ import fetchOngoingPlaylist from './current_playlist_slice'
 import fetchPlaylists from './playlists_slice'
 
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import Client from '../../backend/models/'
+import client from '../../backend/models/'
 import Account from '../../types/account'
 
 export const authenticate = createAsyncThunk('account/authenticate',
   async (loginData: { email?: string, password?: string, token?: string }, thunkApi: any) => {
     const loginAction = async (data: typeof loginData) => {
       if (data.email && data.password) {
-        const client = new Client();
         return client.account.authenticate(data.email, data.password);
       } else if (data.token) {
-        const client = new Client(data.token);
+        client.token = data.token;
         return client.account.me();
       }
       throw new Error('Unexpected login event occured');
@@ -21,8 +20,9 @@ export const authenticate = createAsyncThunk('account/authenticate',
     const resultPromise = Promise.resolve(await loginAction(loginData));
 
     resultPromise.then((result) => {
-      thunkApi.dispatch(fetchOngoingPlaylist);
-      thunkApi.dispatch(fetchPlaylists);
+      // I think this was a hack, im not removing the comments yet but i might have to
+      // thunkApi.dispatch(fetchOngoingPlaylist);
+      // thunkApi.dispatch(fetchPlaylists);
     })
     return resultPromise
 })
@@ -46,6 +46,7 @@ export const accountSlice = createSlice({
       state.id = action.payload;
     },
     setToken: (state, action: PayloadAction<string>) => {
+      client.token = action.payload;
       state.token = action.payload;
     },
     setTokenExpiration: (state, action: PayloadAction<string>) => {
@@ -62,7 +63,7 @@ export const accountSlice = createSlice({
     .addCase(authenticate.rejected, (state, action) => {
       state.status = 'rejected';
       state.id = -1;
-      state.token = '';
+      state.token = undefined;
     })
     .addCase(authenticate.pending, (state, action) => {
       state.status = 'pending';

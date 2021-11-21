@@ -14,6 +14,10 @@ const PlaylistSelectionView = () => {
   const account = useSelector((state: RootState) => state.account)
   const dispatch = useDispatch()
   let history = useHistory();
+
+  if (!account.id) {
+    history.push('/')
+  }
   
   useEffect(() => {
     if (!account.token) { return }
