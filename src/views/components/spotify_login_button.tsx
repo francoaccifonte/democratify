@@ -1,7 +1,11 @@
 import Button from 'react-bootstrap/Button';
+import { useSelector } from 'react-redux';
+
+import { RootState } from '../../features/root_reducer'
 
 const SpotifyLoginButton = () => {
-  const state = '34fFs29kd09';
+  const account = useSelector((state: RootState) => state.account);
+  const state = account.id;
   const scopes = ['user-read-email', 'playlist-read-private', 'playlist-read-collaborative', 'user-read-playback-state', 'user-modify-playback-state', 'user-read-currently-playing']
   const loginURI = "https://accounts.spotify.com/authorize?" +
   "response_type=code&" +

@@ -7,6 +7,7 @@ import './App.css';
 import OngoingPlaylistView from './views/ongoing_playlist/ongoing_playlist_view';
 import LoginView from './views/login_view';
 import PlaylistSelectionView from './views/playlist_selection/playlist_selection_view';
+import PlaylistShowView from './views/playlist_show_view/playlist_show_view';
 import client from './backend/models/'
 import { authenticate } from './features/slices/account_slice'
 
@@ -35,6 +36,7 @@ function App() {
           <Route exact path="/" component={LoginView} />
           <Route exact path="/playlists" component={PlaylistSelectionView} />
           <Route exact path="/playlists/ongoing" component={OngoingPlaylistView} />
+          <Route exact path="/playlists/:id" component={PlaylistShowView} />
         </Switch>
       </Router>
   )
