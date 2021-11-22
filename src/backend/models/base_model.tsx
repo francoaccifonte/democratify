@@ -27,7 +27,7 @@ export default abstract class BaseModel {
     }
 
   show (id: number) {
-    return this.get(`${this.url()}/${id}`)
+    return this.get(`/${id}`)
   }
 
   list(params?: any) {

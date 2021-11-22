@@ -7,6 +7,7 @@ type Playlist = {
   external_url: string,
   cover_art_url: string,
   sample_songs?: Song[],
+  spotify_songs: Song[],
 }
 
 export default Playlist
