@@ -15,26 +15,30 @@ const redirectToPlaylistShow = (playlistId: Number, history: any) => {
 
 const List = (props: ListProps) => {
   
-  return(
-    <Container>
-      <Row>
-        {
-          props.playlists.map((data, id) => {
-            return(
-              <Col>
-                <PlaylistCard
-                  id={data.id}
-                  name={data.name}
-                  url={data.cover_art_url}
-                  onClick={() => redirectToPlaylistShow(data.id, props.history)}
-                />
-              </Col>
-            )
-          })
-        }
-        </Row>
-    </Container>
-  )
+  if (props.playlists.length > 0) {
+    return(
+      <Container>
+        <Row>
+          {
+            props.playlists.map((data, id) => {
+              return(
+                <Col>
+                  <PlaylistCard
+                    id={data.id}
+                    name={data.name}
+                    url={data.cover_art_url}
+                    onClick={() => redirectToPlaylistShow(data.id, props.history)}
+                  />
+                </Col>
+              )
+            })
+          }
+          </Row>
+      </Container>
+    )
+  }
+
+  return(<></>)
 }
 
 export default List;

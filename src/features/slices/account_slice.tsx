@@ -62,7 +62,7 @@ export const accountSlice = createSlice({
     })
     .addCase(authenticate.rejected, (state, action) => {
       state.status = 'rejected';
-      state.id = -1;
+      state.id = undefined;
       state.token = undefined;
     })
     .addCase(authenticate.pending, (state, action) => {

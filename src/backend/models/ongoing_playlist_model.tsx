@@ -4,6 +4,12 @@ class OngoingPlaylistModel extends BaseModel {
   modelName(): string {
     return('ongoing_playlists')
   }
+
+  start(playlistId: number, songId?: number) {
+    return this.post('', {
+      spotify_playlist_id: playlistId
+    ,})
+  }
 }
 
 export { OngoingPlaylistModel }

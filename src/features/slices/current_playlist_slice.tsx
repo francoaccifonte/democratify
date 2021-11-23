@@ -6,20 +6,30 @@ export const fetchOngoingPlaylist = createAsyncThunk('playlists/ongoing',
   async (data: object = {}, thunkApi: any) => {
     const response = await client.ongoingPlaylist.list();
     return response.json();
-})
+  }
+)
 
-interface CurrentPlaylistState {
-  id: number,
-  totalTracks: number,
+export const startOngoingPlaylist = createAsyncThunk('playlists/start',
+  async (data: {playlistId: number, songId?: number}, thunkApi: any) => {
+    const response = await client.ongoingPlaylist.start(data.playlistId, data.songId);
+    return response.json();
+  }
+)
+
+type CurrentPlaylistState = {
+  id: number | undefined,
+  totalTracks: number | undefined,
   candidatePoolSize: number,
   songs: Song[],
+  status: 'idle' | 'pending' | 'fulfilled' | 'rejected'
 }
 
 const initialState: CurrentPlaylistState = {
-  id: -1,
-  totalTracks: -1,
+  id: undefined,
+  totalTracks: undefined,
   candidatePoolSize: 3,
   songs: [],
+  status: 'idle',
 }
 
 export const currentPlaylistSlice = createSlice({
@@ -40,8 +50,27 @@ export const currentPlaylistSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchOngoingPlaylist.fulfilled, (state, action) => {
+      state.status = 'fulfilled'
       state.id = action.payload.id;
       state.songs = action.payload.songs;
+    })
+    .addCase(fetchOngoingPlaylist.pending, (state, action) => {
+      state.status = 'pending'
+    })
+    .addCase(fetchOngoingPlaylist.rejected, (state, action) => {
+      state.status = 'rejected'
+    })
+
+    .addCase(startOngoingPlaylist.fulfilled, (state, action) => {
+      state.status = 'fulfilled'
+      state.id = action.payload.id;
+      state.songs = action.payload.songs;
+    })
+    .addCase(startOngoingPlaylist.pending, (state, action) => {
+      state.status = 'pending'
+    })
+    .addCase(startOngoingPlaylist.rejected, (state, action) => {
+      state.status = 'rejected'
     })
   }
 })
