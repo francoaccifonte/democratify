@@ -9,7 +9,7 @@ export const useOngoingPlaylist = () => {
   const fetchPlaylist = () => dispatch(fetchOngoingPlaylist({}));
   const startPlaylist = (playlistId: number) => dispatch(startOngoingPlaylist({playlistId}));
 
-  if (!ongoingPlaylist.id && fetchingPlaylistStatus === 'idle') {
+  if (fetchingPlaylistStatus === 'idle') {
     fetchPlaylist();
   }
   return {

@@ -8,7 +8,7 @@ export const usePlaylist = () => {
   const fetchingPlaylistStatus = useSelector((state: RootState) => state.playlistData.status);
 
   const fetchPlaylistData = (id: number) => {
-    if (fetchingPlaylistStatus !== 'pending') {
+    if (fetchingPlaylistStatus === 'idle') {
       dispatch(fetchPlaylist({id: id}));
     }
   }

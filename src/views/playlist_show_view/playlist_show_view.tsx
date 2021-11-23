@@ -1,5 +1,6 @@
 import {
-  RouteComponentProps
+  RouteComponentProps,
+  useHistory
 } from "react-router-dom";
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -15,6 +16,7 @@ type TParams = { id: string };
 
 const PlaylistShowView = ({ match }: RouteComponentProps<TParams>) => {
   const routeId = Number(match.params.id);
+  const history = useHistory();
   const { startPlaylist } = useOngoingPlaylist();
   const { playlistData, fetchPlaylistData, fetchingPlaylistStatus } = usePlaylist();
 
@@ -70,7 +72,7 @@ const PlaylistShowView = ({ match }: RouteComponentProps<TParams>) => {
           </Col>
         </Row>
       </Container>
-      <PlayerFooter />
+      <PlayerFooter history={history}/>
     </>
   )
 }

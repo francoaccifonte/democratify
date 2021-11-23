@@ -27,7 +27,7 @@ const PlaylistSelectionView = () => {
     <>
       <SpotifyLoginButton />
       <List playlists={playlists.playlists} history={history}/>
-      <PlayerFooter />
+      <PlayerFooter history={history}/>
     </>
   );
 };  

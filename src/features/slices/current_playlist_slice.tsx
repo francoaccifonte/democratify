@@ -21,6 +21,7 @@ type CurrentPlaylistState = {
   totalTracks: number | undefined,
   candidatePoolSize: number,
   songs: Song[],
+  playingSong: Song | undefined,
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected'
 }
 
@@ -29,6 +30,7 @@ const initialState: CurrentPlaylistState = {
   totalTracks: undefined,
   candidatePoolSize: 3,
   songs: [],
+  playingSong: undefined,
   status: 'idle',
 }
 
@@ -53,6 +55,7 @@ export const currentPlaylistSlice = createSlice({
       state.status = 'fulfilled'
       state.id = action.payload.id;
       state.songs = action.payload.songs;
+      state.playingSong = action.payload.playing_song;
     })
     .addCase(fetchOngoingPlaylist.pending, (state, action) => {
       state.status = 'pending'
@@ -65,6 +68,7 @@ export const currentPlaylistSlice = createSlice({
       state.status = 'fulfilled'
       state.id = action.payload.id;
       state.songs = action.payload.songs;
+      state.playingSong = action.payload.playing_song;
     })
     .addCase(startOngoingPlaylist.pending, (state, action) => {
       state.status = 'pending'
