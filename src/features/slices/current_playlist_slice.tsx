@@ -54,7 +54,7 @@ export const currentPlaylistSlice = createSlice({
     builder.addCase(fetchOngoingPlaylist.fulfilled, (state, action) => {
       state.status = 'fulfilled'
       state.id = action.payload.id;
-      state.songs = action.payload.songs;
+      state.songs = action.payload.spotify_songs;
       state.playingSong = action.payload.playing_song;
     })
     .addCase(fetchOngoingPlaylist.pending, (state, action) => {
@@ -67,7 +67,7 @@ export const currentPlaylistSlice = createSlice({
     .addCase(startOngoingPlaylist.fulfilled, (state, action) => {
       state.status = 'fulfilled'
       state.id = action.payload.id;
-      state.songs = action.payload.songs;
+      state.songs = action.payload.spotify_songs;
       state.playingSong = action.payload.playing_song;
     })
     .addCase(startOngoingPlaylist.pending, (state, action) => {

@@ -2,12 +2,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
-import { useSelector, useDispatch } from 'react-redux'
-import { RootState } from '../../features/root_reducer'
-import { parseFromPlaylistReorderer } from '../../features/slices/current_playlist_slice'
+import { useDispatch } from 'react-redux'
 import CSS from 'csstype';
 
+import { parseFromPlaylistReorderer } from '../../features/slices/current_playlist_slice'
 import SongListElementDraggable from './song_list_element_draggable'
+import { useOngoingPlaylist } from '../../hooks/useOngoingPlaylist'
 
 const SongList = () => {
   const songListStyle: CSS.Properties = {
@@ -16,9 +16,9 @@ const SongList = () => {
     overflowY: "auto",
   }
 
-  const dispatch = useDispatch()
-  const songs = useSelector((state: RootState) => state.currentPlaylist.songs)
-
+  const dispatch = useDispatch();
+  const { ongoingPlaylist } = useOngoingPlaylist();
+  const songs = ongoingPlaylist.songs;
 
   const handleDragEnd = (result: any) => {
     if (! (result && result.source && result.destination) ) { return }
@@ -42,6 +42,14 @@ const SongList = () => {
       </Row>
     )
   }
+
+  if (!songs) { 
+    return (
+      <div>
+        404 
+      </div>
+    )
+   }
 
   return(
     <Container>

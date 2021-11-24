@@ -18,19 +18,13 @@ const PlaylistShowView = ({ match }: RouteComponentProps<TParams>) => {
   const routeId = Number(match.params.id);
   const history = useHistory();
   const { startPlaylist } = useOngoingPlaylist();
-  const { playlistData, fetchPlaylistData, fetchingPlaylistStatus } = usePlaylist();
-
-  const playlist = playlistData(routeId)
+  const { playlist, requestStatus } = usePlaylist(routeId);
 
   const handleClick = () => {
     startPlaylist(playlist.id)
   }
 
-  if (!playlist) {
-    fetchPlaylistData(routeId)
-  }
-
-  if (!playlist && ['pending', 'idle'].includes(fetchingPlaylistStatus)) {
+  if (!playlist && ['pending', 'idle'].includes(requestStatus)) {
     return (
       <div>
         Cargando
@@ -38,7 +32,7 @@ const PlaylistShowView = ({ match }: RouteComponentProps<TParams>) => {
     )
   }
 
-  if (!playlist && fetchingPlaylistStatus === 'fulfilled') {
+  if (!playlist) {
     return (
       <div>
         404

@@ -1,5 +1,4 @@
 import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,7 +12,7 @@ type PlayerFooterProps = {
 
 const PlayerFooter = (props: PlayerFooterProps) => {
   const { ongoingPlaylist } = useOngoingPlaylist()
-  const redirect = () => props.history.push('/playlists/onging')
+  const redirect = () => props.history.push('/playlists/ongoing')
 
   type contentProps = { ongoingPlaylist: any, votation: any };
   const NavbarContent = (props: contentProps) => {

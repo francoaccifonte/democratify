@@ -5,27 +5,23 @@ import CSS from 'csstype';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import Player from "../components/player";
 import SongList from "../components/song_list";
-import { fetchOngoingPlaylist } from "../../features/slices/current_playlist_slice";
 import { RootState } from "../../features/root_reducer";
 
 const OngoingPlaylistView = () => {
   const containerStyle: CSS.Properties = {
     height: "100vh"
   }
-  const dispatch = useDispatch()
   const history = useHistory()
   const account = useSelector((state: RootState) => state.account)
 
-  if (!account.id) {
+  if (!account.id && ['rejected', 'fullfilled'].includes(account.status) ) {
     history.push('/')
   }
-
-  dispatch(fetchOngoingPlaylist())
 
   return(
     <>

@@ -1,21 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../features/root_reducer'
 import { startOngoingPlaylist, fetchOngoingPlaylist } from '../features/slices/current_playlist_slice'
+import { useEffect } from 'react';
 
 export const useOngoingPlaylist = () => {
   const dispatch = useDispatch();
-  const ongoingPlaylist = useSelector((state: RootState) => state.currentPlaylist);
-  const fetchingPlaylistStatus = useSelector((state: RootState) => state.currentPlaylist.status);
-  const fetchPlaylist = () => dispatch(fetchOngoingPlaylist({}));
   const startPlaylist = (playlistId: number) => dispatch(startOngoingPlaylist({playlistId}));
 
-  if (fetchingPlaylistStatus === 'idle') {
-    fetchPlaylist();
-  }
+  var ongoingPlaylist = useSelector((state: RootState) => state.currentPlaylist);
+
+  useEffect(() => {
+    if (!ongoingPlaylist.id) {
+      dispatch(fetchOngoingPlaylist({}))
+    }
+  }, [dispatch, ongoingPlaylist]);
+  
+
+  ongoingPlaylist = useSelector((state: RootState) => state.currentPlaylist);
   return {
     ongoingPlaylist,
-    fetchingPlaylistStatus,
-    fetchPlaylist,
     startPlaylist,
-  };
+  }
 }

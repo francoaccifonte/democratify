@@ -1,22 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../features/root_reducer'
 import { fetchPlaylist } from '../features/slices/playlist_data_slice'
+import { useEffect } from 'react';
 
-export const usePlaylist = () => {
+export const usePlaylist = (id: number) => {
   const dispatch = useDispatch();
-  const playlists = useSelector((state: RootState) => state.playlistData.playlists);
-  const fetchingPlaylistStatus = useSelector((state: RootState) => state.playlistData.status);
+  var playlist = useSelector((state: RootState) => state.playlistData.playlists[id]);
+  const requestStatus = useSelector((state: RootState) => state.playlistData.status);
 
-  const fetchPlaylistData = (id: number) => {
-    if (fetchingPlaylistStatus === 'idle') {
-      dispatch(fetchPlaylist({id: id}));
+  useEffect(() => {
+    if (!playlist) {
+      dispatch(fetchPlaylist({id: id}))
     }
-  }
-  const playlistData = (id: number) => playlists[id];
+  }, [id, dispatch, playlist]);
+
+  playlist = useSelector((state: RootState) => state.playlistData.playlists[id]);
 
   return {
-    fetchPlaylistData,
-    playlistData,
-    fetchingPlaylistStatus,
-  };
+    playlist,
+    requestStatus
+  }
 }
