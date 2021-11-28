@@ -5,12 +5,12 @@ import { useEffect } from 'react';
 
 export const useOngoingPlaylist = () => {
   const dispatch = useDispatch();
-  const startPlaylist = (playlistId: number) => dispatch(startOngoingPlaylist({playlistId}));
+  const startPlaylist = (playlistId: number, songId?: number) => dispatch(startOngoingPlaylist({playlistId, songId}));
 
   var ongoingPlaylist = useSelector((state: RootState) => state.currentPlaylist);
 
   useEffect(() => {
-    if (!ongoingPlaylist.id) {
+    if (!ongoingPlaylist.id && ongoingPlaylist.status === 'idle') {
       dispatch(fetchOngoingPlaylist({}))
     }
   }, [dispatch, ongoingPlaylist]);

@@ -7,8 +7,9 @@ class OngoingPlaylistModel extends BaseModel {
 
   start(playlistId: number, songId?: number) {
     return this.post('', {
-      spotify_playlist_id: playlistId
-    ,})
+      spotify_playlist_id: playlistId,
+      playling_song_id: songId,
+    })
   }
 }
 

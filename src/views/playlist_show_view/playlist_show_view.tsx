@@ -17,7 +17,7 @@ type TParams = { id: string };
 const PlaylistShowView = ({ match }: RouteComponentProps<TParams>) => {
   const routeId = Number(match.params.id);
   const history = useHistory();
-  const { startPlaylist } = useOngoingPlaylist();
+  const { ongoingPlaylist, startPlaylist } = useOngoingPlaylist();
   const { playlist, requestStatus } = usePlaylist(routeId);
 
   const handleClick = () => {
@@ -47,7 +47,7 @@ const PlaylistShowView = ({ match }: RouteComponentProps<TParams>) => {
           <Col md={4}>
             <Image src={playlist.cover_art_url} fluid/>
             <div className="d-grid gap-2">
-              <Button variant="primary" className="mt-5" size="lg" onClick={handleClick}>
+              <Button variant={!!ongoingPlaylist.id ? "danger" : "primary"} className="mt-5" size="lg" onClick={handleClick} >
                 Reproducir
               </Button>
             </div>
