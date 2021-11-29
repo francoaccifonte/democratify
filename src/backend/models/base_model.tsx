@@ -66,4 +66,36 @@ export default abstract class BaseModel {
       options
     )
   }
+
+  appGet(path?: string, params?: any) {
+    var url = new URL(`${this.baseUrl}/${path}`);
+    if (params) {
+      for (const key in params) {
+        url.searchParams.append(key, params[key])
+      }
+    }
+
+    var options: object = {
+      method: 'GET',
+      mode: 'cors',
+    }
+    options = {...options, headers: this.baseHeaders()}
+    return fetch(
+      url.toString(),
+      options
+    )
+  }
+
+  appPut(path: string = '', body?: any) {
+    var options: object = {
+      method: 'PUT',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    }
+    options = {...options, headers: this.baseHeaders()}
+    return fetch(
+      `${this.baseUrl}/${path}`,
+      options
+    )
+  }
 }

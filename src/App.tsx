@@ -38,7 +38,7 @@ function App() {
           <Route exact path="/playlists" component={PlaylistSelectionView} />
           <Route exact path="/playlists/ongoing" component={OngoingPlaylistView} />
           <Route exact path="/playlists/:id" component={PlaylistShowView} />
-          <Route exact path="/votations/:id" component={VotationView} />
+          <Route exact path="/account/:id/votation" component={VotationView} />
         </Switch>
       </Router>
   )
