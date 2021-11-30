@@ -8,8 +8,8 @@ import Col from 'react-bootstrap/Col'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import Player from "../components/player";
-import SongList from "../components/song_list";
+import Player from "./player";
+import SongList from "./song_list";
 import { RootState } from "../../features/root_reducer";
 
 const OngoingPlaylistView = () => {

@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row'
 import { useSelector, useDispatch } from 'react-redux'
 import { incrementPoolSize, decrementPoolSize } from '../../features/slices/current_playlist_slice'
 import { RootState } from '../../features/root_reducer'
-import SpotifyLoginButton from './spotify_login_button'
+import SpotifyLoginButton from '../components/spotify_login_button'
 
 const Player = () => {
   const image = Faker.image.imageUrl;
