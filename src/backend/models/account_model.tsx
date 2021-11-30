@@ -18,7 +18,7 @@ class AccountModel extends BaseModel {
       email: email,
       password: password
     }
-    const account: any = await this.post("/login", body)
+    const account: any = await this.post(body, "/login")
 
     return account.json()
   }

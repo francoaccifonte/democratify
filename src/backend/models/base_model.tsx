@@ -34,7 +34,20 @@ export default abstract class BaseModel {
     return this.get('', params)
   }
 
-  post (path: string = '', body: object = {}) {
+  put (id: number, body: object = {}, path: string = '') {
+    var options: object = {
+      method: 'PUT',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    }
+    options = {...options, headers: this.baseHeaders()}
+    return fetch(
+      `${this.url()}${path}/${id}`,
+      options
+    )
+  }
+
+  post (body: object = {}, path: string = '') {
     var options: object = {
       method: 'POST',
       mode: 'cors',
@@ -86,9 +99,22 @@ export default abstract class BaseModel {
     )
   }
 
-  appPut(path: string = '', body?: any) {
+  appPut(body?: any, path: string = '') {
     var options: object = {
       method: 'PUT',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    }
+    options = {...options, headers: this.baseHeaders()}
+    return fetch(
+      `${this.baseUrl}/${path}`,
+      options
+    )
+  }
+
+  appPost(body?: any, path: string = '') {
+    var options: object = {
+      method: 'POST',
       mode: 'cors',
       body: JSON.stringify(body),
     }

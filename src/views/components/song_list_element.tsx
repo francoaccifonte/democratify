@@ -12,15 +12,11 @@ type songListProps = {
 
 const SongListElement = ({ rowNumber, data }: songListProps): JSX.Element => {
   const candidatePool = useSelector((state: RootState) => state.currentPlaylist.candidatePoolSize)
-  let color: string = rowNumber === 0
-    ? "bg-primary"
-    : rowNumber <= candidatePool
-      ? "bg-success"
-      : "bg-secondary"
+  const color = rowNumber < candidatePool ? 'primary' : 'secondary'
 
   return(
     <>
-      <Row className={`${color} my-2 px-2 py-2`}>
+      <Row className={`bg-${color} my-2 px-2 py-2`}>
         <Col lg={1}>
           <Image src={data.cover_art[2].url} alt="album art" roundedCircle/>
         </Col>
