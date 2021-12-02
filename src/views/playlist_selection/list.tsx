@@ -2,6 +2,7 @@ import Playlist from '../../types/playlist'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import PlaylistCard from './playlist_card'
 
 type ListProps = {
   playlists: Playlist[],
@@ -12,26 +13,32 @@ const redirectToPlaylistShow = (playlistId: Number, history: any) => {
   history.push(`/playlists/${playlistId}`)
 }
 
-const renderPlaylist = (playlist: Playlist, index: Number, history: any) => {
-  return (
-    <Row>
-      <Col onClick={() => redirectToPlaylistShow(playlist.id, history)}>
-        {playlist.name}
-      </Col>
-    </Row>
-  )
-};
-
 const List = (props: ListProps) => {
-  return(
-    <Container>
-      {
-        props.playlists.map((data, id) => {
-          return(renderPlaylist(data, id, props.history))
-        })
-      }
-    </Container>
-  )
+  
+  if (props.playlists.length > 0) {
+    return(
+      <Container>
+        <Row>
+          {
+            props.playlists.map((data, id) => {
+              return(
+                <Col>
+                  <PlaylistCard
+                    id={data.id}
+                    name={data.name}
+                    url={data.cover_art_url}
+                    onClick={() => redirectToPlaylistShow(data.id, props.history)}
+                  />
+                </Col>
+              )
+            })
+          }
+          </Row>
+      </Container>
+    )
+  }
+
+  return(<></>)
 }
 
 export default List;

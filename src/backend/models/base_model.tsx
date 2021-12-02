@@ -21,20 +21,33 @@ export default abstract class BaseModel {
       'Accept': 'application/json',
     }
     if (this.token) {
-      headers = {...headers, Authentication: `Bearer ${this.token}`}
+      headers = {...headers, Authorization: `Bearer ${this.token}`}
     }
     return headers;
     }
 
   show (id: number) {
-    return this.get(`${this.url()}/${id}`)
+    return this.get(`/${id}`)
   }
 
   list(params?: any) {
     return this.get('', params)
   }
 
-  post (path: string = '', body: object = {}) {
+  put (id: number, body: object = {}, path: string = '') {
+    var options: object = {
+      method: 'PUT',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    }
+    options = {...options, headers: this.baseHeaders()}
+    return fetch(
+      `${this.url()}${path}/${id}`,
+      options
+    )
+  }
+
+  post (body: object = {}, path: string = '') {
     var options: object = {
       method: 'POST',
       mode: 'cors',
@@ -63,6 +76,51 @@ export default abstract class BaseModel {
     options = {...options, headers: this.baseHeaders()}
     return fetch(
       url.toString(),
+      options
+    )
+  }
+
+  appGet(path?: string, params?: any) {
+    var url = new URL(`${this.baseUrl}/${path}`);
+    if (params) {
+      for (const key in params) {
+        url.searchParams.append(key, params[key])
+      }
+    }
+
+    var options: object = {
+      method: 'GET',
+      mode: 'cors',
+    }
+    options = {...options, headers: this.baseHeaders()}
+    return fetch(
+      url.toString(),
+      options
+    )
+  }
+
+  appPut(body?: any, path: string = '') {
+    var options: object = {
+      method: 'PUT',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    }
+    options = {...options, headers: this.baseHeaders()}
+    return fetch(
+      `${this.baseUrl}/${path}`,
+      options
+    )
+  }
+
+  appPost(body?: any, path: string = '') {
+    var options: object = {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(body),
+    }
+    options = {...options, headers: this.baseHeaders()}
+    return fetch(
+      `${this.baseUrl}/${path}`,
       options
     )
   }
