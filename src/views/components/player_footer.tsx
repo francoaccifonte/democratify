@@ -1,55 +1,101 @@
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Container from 'react-bootstrap/Container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { useHistory } from 'react-router'
 
 import { useOngoingPlaylist } from '../../hooks/useOngoingPlaylist'
 
-type PlayerFooterProps = {
-  history: any
-}
+type PlayerFooterProps = {}
 
 const PlayerFooter = (props: PlayerFooterProps) => {
   const { ongoingPlaylist } = useOngoingPlaylist()
-  const redirect = () => props.history.push('/playlists/ongoing')
-
-  type contentProps = { ongoingPlaylist: any, votation: any };
-  const NavbarContent = (props: contentProps) => {
-    return(
-      <>
-        <Navbar.Brand onClick={redirect}>
-          <FontAwesomeIcon icon={faPlay} size="2x"/>
-        </Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link onClick={redirect}>
-            Estas escuchando:
-          </Nav.Link>
-          <Nav.Link onClick={redirect}>
-            {ongoingPlaylist?.playingSong?.title} - {ongoingPlaylist?.playingSong?.artist}
-          </Nav.Link>
-          <Nav.Link onClick={redirect}>
-            Proxima cancion lablabal
-          </Nav.Link>
-        </Nav>
-      </>
-    )
-  }
+  const history = useHistory();
+  const redirect = () => history.push('/playlists/ongoing')
 
   if (!ongoingPlaylist) {
-    return(
-      <div>fafa</div>
-    )
+    return(null)
+  }
+
+  const semicirclePosition = 0.37
+
+  var textStyle = {
+    fontSize: "1.5rem",
+    fontWeight: "semibold" as "bold",
+    color: "white",
+    fontFamily: "Poppins"
+  };
+
+  var containerStyle = {
+    height: "8rem",
+    bottom: "0",
+    width: "100%",
+    backgroundColor: "#021335",
+    position: "fixed" as "fixed",
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row" as "row",
+    cursor: "pointer"
+  };
+
+  var playerButtonStyle = {
+    width: "10%",
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column" as "column",
+  };
+  
+  var currentSongBlockStyle = {
+    width: "53%",
+    display: "flex",
+    flexDirection: "row" as "row",
+    alignItems: "center",
+  };
+
+    var listeningWordingStyle = {
+      height: "1.5rem",
+      paddingRight: "3rem",
+      display: "flex",
+      flexDirection: "column" as "column",
+      justifyContent: "space-evenly",
+      margin: "0 0 0 0",
+    };
+
+  var nextSongStyle = {
+    paddingLeft: "2rem",
+    width: "37%",
+    height: "100%",
+    backgroundColor: "#5571AA",
+    display: "flex",
+    flexDirection: "row" as "row",
+    alignItems: "center",
   }
 
   if (ongoingPlaylist.status === 'fulfilled' && ongoingPlaylist.id) {
-    return(
-      <Navbar expand="lg" variant="dark" fixed="bottom" bg="dark" style={{height: "8rem"}}>
-        <Container>
-          <NavbarContent ongoingPlaylist={ongoingPlaylist} votation={{}}/>
-        </Container>
-      </Navbar>
-    )
+      return(
+        <>
+          <div style={{height: "9rem"}} />
+          <div className="player-footer-container" style={containerStyle} onClick={redirect}>
+            <div className="player-button" style={playerButtonStyle}>
+              <FontAwesomeIcon icon={faPlay} size="5x" color="white"/>
+            </div>
+            <div className="player-footer-current-song" style={{...textStyle, ...currentSongBlockStyle}}>
+              <div className="player-footer-current-song-wording" style={listeningWordingStyle}>
+                Estas escuchando:
+              </div>
+              <div className="player-footer-current-song-details">
+                <div className="player-footer-current-song-title">
+                  {ongoingPlaylist?.playingSong?.title}
+                </div>
+                <div>
+                  {ongoingPlaylist?.playingSong?.artist}
+                </div>
+              </div>
+            </div>
+            <div className="player-footer-next-song" style={{...textStyle, ...nextSongStyle}}>
+              Proxima cancion lablabal
+            </div>
+          </div>
+        </>
+      )
   }
   
   return (
