@@ -3,7 +3,7 @@ export default abstract class BaseModel {
   token: string | undefined;
 
   constructor(token?: string) {
-    this.baseUrl  = 'http://localhost:3001';
+    this.baseUrl  = 'http://192.168.0.49:3001';
     this.token = token;
   }
 

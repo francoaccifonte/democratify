@@ -22,7 +22,7 @@ const LoginView = () => {
     if (accountId) {
       history.push('/playlists');
     }
-  }, [accountId])
+  }, [accountId, history])
 
 
   const handleLogIn = (event: React.FormEvent<HTMLFormElement>) => {

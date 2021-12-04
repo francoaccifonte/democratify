@@ -15,7 +15,7 @@ const PlayerFooter = (props: PlayerFooterProps) => {
     return(null)
   }
 
-  const semicirclePosition = 0.37
+  // const semicirclePosition = 0.37
 
   var textStyle = {
     fontSize: "1.5rem",
