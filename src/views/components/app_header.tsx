@@ -14,7 +14,7 @@ type HeaderProps = {
 
 const AppHeader = (props: HeaderProps) => {
  return(
-   <Container className={props.className} style={props.style}>
+   <Container fluid className={props.className} style={{height: "8rem", backgroundColor: "#0B2355", ...props.style}} >
      <Row>
        <Col xs={3}>
         <Logo />

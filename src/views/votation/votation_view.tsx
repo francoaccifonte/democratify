@@ -2,11 +2,14 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 
 import { useVotation } from '../../hooks/useVotation'
 import CandidateElement from './candidate_item'
+import FullHeigthSkeleton from '../full_height_skeleton'
 
 type TParams = { id: string };
 
@@ -26,9 +29,9 @@ const VotationView = ({ match }: RouteComponentProps<TParams>) => {
 
   const candidates = votationState.votation.votation_candidates;
 
-  const renderCandidates = () => {
+  const Candidates = () => {
     return(
-      <Container style={{overflowY: "scroll"}}>
+      <Container style={{overflowY: "auto"}}>
           {
             candidates?.map((candidate, index) => {
               return(
@@ -36,14 +39,18 @@ const VotationView = ({ match }: RouteComponentProps<TParams>) => {
               )
             })
           }
-        </Container>
+      </Container>
     )
   };
 
   const VoteButton = () => {
     if(selected) {
       return(
-        <Button className="mb-3 mt-3" onClick={() => handleVote(selected)}>Votar</Button>
+        <Container fluid>
+          <Row>
+            <Button className="mb-3 mt-3" onClick={() => handleVote(selected)}>Votar</Button>
+          </Row>
+        </Container>
       )
     } else {
       return <Button className="mb-3 mt-3" disabled>Votar</Button>
@@ -53,10 +60,10 @@ const VotationView = ({ match }: RouteComponentProps<TParams>) => {
   if (candidates === []) { return <div>No hay candidatas</div>}
 
   return(
-    <Container className="d-flex flex-column justify-content-between" style={{background: "#E953C9", height: "100vh"}} fluid>
-      {renderCandidates()}
+    <FullHeigthSkeleton header palette='user' flexDirectionColumn>
+      <Candidates />
       <VoteButton />
-    </Container>
+    </FullHeigthSkeleton>
   )
 }
 

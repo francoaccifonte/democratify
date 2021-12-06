@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { List } from './index'
 import { fetchPlaylists } from '../../features/slices/playlists_slice'
 import { RootState } from '../../features/root_reducer'
-import SpotifyLoginButton from '../components/spotify_login_button'
-import PlayerFooter from "../components/player_footer";
+import FullHeightSkeleton from "../full_height_skeleton";
 
 const PlaylistSelectionView = () => {
   const playlists = useSelector((state: RootState) => state.playlists)
@@ -24,11 +23,9 @@ const PlaylistSelectionView = () => {
   }, [account.token, dispatch]);
 
   return(
-    <>
-      <SpotifyLoginButton />
+    <FullHeightSkeleton header footer palette='admin'>
       <List playlists={playlists.playlists} history={history}/>
-      <PlayerFooter />
-    </>
+    </FullHeightSkeleton>
   );
 };  
 
