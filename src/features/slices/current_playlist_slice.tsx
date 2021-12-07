@@ -52,7 +52,7 @@ export const currentPlaylistSlice = createSlice({
     setId: (state, action: PayloadAction<number>) => { state.id = action.payload },
     setCandidatePoolSize: (state, action: PayloadAction<number>) => { state.candidatePoolSize = action.payload },
     incrementPoolSize: (state) => { state.candidatePoolSize += 1 },
-    decrementPoolSize: (state) => { state.candidatePoolSize = Math.max(0, state.candidatePoolSize -1) },
+    decrementPoolSize: (state) => { state.candidatePoolSize = Math.max(2, state.candidatePoolSize -1) },
     parseFromPlaylistReorderer: (state, action: PayloadAction<Song[]>) => {
       state.remainingSongs = action.payload;
     }

@@ -1,5 +1,4 @@
 import BaseModel from './base_model'
-import Account from '../../types/account'
 
 class AccountModel extends BaseModel {
   modelName(): string {
