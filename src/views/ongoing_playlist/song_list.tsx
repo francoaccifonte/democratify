@@ -60,7 +60,7 @@ const SongList = () => {
 
   return(
     <Container>
-      <div className="bg-dark" style={songListStyle}>
+      <div style={songListStyle}>
         {renderListHeader()}
         <PlayingSong song={playingSong} />
         <VotingSongs songs={votingSongs} />

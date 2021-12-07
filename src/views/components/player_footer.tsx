@@ -1,10 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from 'react-router'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 
 import { useOngoingPlaylist } from '../../hooks/useOngoingPlaylist'
 
-type PlayerFooterProps = {}
+type PlayerFooterProps = {
+  className?: string,
+  style?: React.CSSProperties,
+}
 
 const PlayerFooter = (props: PlayerFooterProps) => {
   const { ongoingPlaylist } = useOngoingPlaylist()
@@ -15,91 +21,36 @@ const PlayerFooter = (props: PlayerFooterProps) => {
     return(null)
   }
 
-  // const semicirclePosition = 0.37
-
-  var textStyle = {
-    fontSize: "1.5rem",
-    fontWeight: "semibold" as "bold",
-    color: "white",
-    fontFamily: "Poppins"
-  };
-
-  var containerStyle = {
-    height: "8rem",
-    bottom: "0",
-    width: "100%",
-    backgroundColor: "#021335",
-    position: "fixed" as "fixed",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "row" as "row",
-    cursor: "pointer"
-  };
-
-  var playerButtonStyle = {
-    width: "10%",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column" as "column",
-  };
-  
-  var currentSongBlockStyle = {
-    width: "53%",
-    display: "flex",
-    flexDirection: "row" as "row",
-    alignItems: "center",
-  };
-
-    var listeningWordingStyle = {
-      height: "1.5rem",
-      paddingRight: "3rem",
-      display: "flex",
-      flexDirection: "column" as "column",
-      justifyContent: "space-evenly",
-      margin: "0 0 0 0",
-    };
-
-  var nextSongStyle = {
-    paddingLeft: "2rem",
-    width: "37%",
-    height: "100%",
-    backgroundColor: "#5571AA",
-    display: "flex",
-    flexDirection: "row" as "row",
-    alignItems: "center",
-  }
-
   if (ongoingPlaylist.status === 'fulfilled' && ongoingPlaylist.id) {
       return(
         <>
-          <div style={{height: "9rem"}} />
-          <div className="player-footer-container" style={containerStyle} onClick={redirect}>
-            <div className="player-button" style={playerButtonStyle}>
+          <Container fluid onClick={redirect} style={{height: "8rem", backgroundColor: "#0B2355"}} className={`${props.className} d-flex flex-row`}>
+            <Col >
               <FontAwesomeIcon icon={faPlay} size="5x" color="white"/>
-            </div>
-            <div className="player-footer-current-song" style={{...textStyle, ...currentSongBlockStyle}}>
-              <div className="player-footer-current-song-wording" style={listeningWordingStyle}>
+            </Col>
+            <Col>
+              <Col>
                 Estas escuchando:
-              </div>
-              <div className="player-footer-current-song-details">
-                <div className="player-footer-current-song-title">
+              </Col>
+              <Col>
+                <Row>
                   {ongoingPlaylist?.playingSong?.title}
-                </div>
-                <div>
+                </Row>
+                <Row>
                   {ongoingPlaylist?.playingSong?.artist}
-                </div>
-              </div>
-            </div>
-            <div className="player-footer-next-song" style={{...textStyle, ...nextSongStyle}}>
+                </Row>
+              </Col>
+            </Col>
+            <Col>
               Proxima cancion lablabal
-            </div>
-          </div>
+            </Col>
+          </Container>
         </>
       )
   }
   
   return (
-    <></>
+    null
   )
 }
 

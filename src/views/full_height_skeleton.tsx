@@ -8,18 +8,31 @@ import { ColorProps } from '../color_palette'
 type SkeletonProps = {
   header?: boolean;
   footer?: boolean;
-  backgroundColor: ColorProps;
+  flexDirectionColumn?: boolean;
+  palette: ColorProps['palette'];
   children: React.ReactNode;
 };
 
+const AddHeader = (props: { header?: boolean, palette: ColorProps['palette'] }) => {
+  if (props.header) return <AppHeader palette={props.palette}/>
+  return null
+}
+
+const AddFooter = (props: { footer?: boolean }) => {
+  if (props.footer) return <PlayerFooter className="mt-auto" style={{alignSelf: "flex-end"}} />
+  return null
+}
+
 const FullHeightSkeleton = (props: SkeletonProps) => {
+  const classNames = props.flexDirectionColumn ? "d-flex align-self-start flex-column" : "d-flex align-self-start flex-row"
+
   return (
-    <BackgroundContainer backgroundColor={props.backgroundColor}>
-      <AppHeader className=""/>
-      <Container className="d-flex align-self-start" style={{overflowY: "auto", alignSelf: "flex-end"}}>
+    <BackgroundContainer backgroundColor={{palette: props.palette}}>
+      <AddHeader header={props.header} palette={props.palette}/>
+      <Container className={classNames} style={{overflowY: "auto"}}>
         {props.children}
       </Container>
-      <PlayerFooter className="mt-auto" style={{alignSelf: "flex-end"}} />
+      <AddFooter footer={props.footer}/>
     </BackgroundContainer>
   );
 }
