@@ -4,6 +4,9 @@ import Image from 'react-bootstrap/Image'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../features/root_reducer'
 import { Song } from '../../types/song'
+import Text from '../components/text'
+
+import { adminPalette } from "../../color_palette"
 
 type songListProps = {
   rowNumber: number;
@@ -12,17 +15,23 @@ type songListProps = {
 
 const SongListElement = ({ rowNumber, data }: songListProps): JSX.Element => {
   const candidatePool = useSelector((state: RootState) => state.currentPlaylist.candidatePoolSize)
-  const color = rowNumber < candidatePool ? 'primary' : 'secondary'
+  const color = rowNumber < candidatePool ? adminPalette.Success : adminPalette.Secondary
 
   return(
     <>
-      <Row className={`bg-${color} my-2 px-2 py-2`}>
+      <Row className={'my-2 px-2 py-2'} style={{backgroundColor: color}}>
         <Col lg={1}>
           <Image src={data.cover_art[2].url} alt="album art" roundedCircle/>
         </Col>
-        <Col xs={4} sm={3}>{`${data.title}`}</Col>
-        <Col xs={4} sm={3}>{`${data.artist}`}</Col>
-        <Col sm={4} className="d-none d-sm-block">{`${data.album}`}</Col>
+        <Col xs={4} sm={3}>
+          <Text type="bodyRegular" color="White">{data.title}</Text>
+        </Col>
+        <Col xs={4} sm={3}>
+          <Text type="bodyRegular" color="White">{data.artist}</Text>
+        </Col>
+        <Col sm={4} className="d-none d-sm-block">
+          <Text type="bodyRegular" color="White">{data.album}</Text>
+        </Col>
       </Row>
     </>
   )

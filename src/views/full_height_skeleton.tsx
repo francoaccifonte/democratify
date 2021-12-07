@@ -9,6 +9,7 @@ type SkeletonProps = {
   header?: boolean;
   footer?: boolean;
   flexDirectionColumn?: boolean;
+  overflowY?: "scroll" | "hidden";
   palette: ColorProps['palette'];
   children: React.ReactNode;
 };
@@ -24,12 +25,13 @@ const AddFooter = (props: { footer?: boolean }) => {
 }
 
 const FullHeightSkeleton = (props: SkeletonProps) => {
+  const overflowY = props.overflowY ? props.overflowY : "scroll";
   const classNames = props.flexDirectionColumn ? "d-flex align-self-start flex-column" : "d-flex align-self-start flex-row"
 
   return (
     <BackgroundContainer backgroundColor={{palette: props.palette}}>
       <AddHeader header={props.header} palette={props.palette}/>
-      <Container className={classNames} style={{overflowY: "auto"}}>
+      <Container className={classNames} style={{overflowY: overflowY}}>
         {props.children}
       </Container>
       <AddFooter footer={props.footer}/>

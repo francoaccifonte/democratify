@@ -3,7 +3,6 @@ import {
 } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 
@@ -60,7 +59,7 @@ const VotationView = ({ match }: RouteComponentProps<TParams>) => {
   if (candidates === []) { return <div>No hay candidatas</div>}
 
   return(
-    <FullHeigthSkeleton header palette='user' flexDirectionColumn>
+    <FullHeigthSkeleton header palette='user' flexDirectionColumn overflowY="hidden">
       <Candidates />
       <VoteButton />
     </FullHeigthSkeleton>

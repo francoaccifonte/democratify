@@ -1,5 +1,3 @@
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux'
@@ -13,9 +11,9 @@ import VotingSongs from './voting_songs'
 
 const SongList = () => {
   const songListStyle: CSS.Properties = {
-    height: "100vh",
     overflowX: "hidden",
-    overflowY: "auto",
+    overflowY: "scroll",
+    height: "100%",
   }
 
   var timerId: any;
@@ -39,16 +37,6 @@ const SongList = () => {
     }, 3000)
   }
 
-  const renderListHeader = () => {
-    return(
-      <Row className="px-2 pt-2">
-        <Col xs={6} sm={4}>Title</Col>
-        <Col xs={6} sm={4}>Artist</Col>
-        <Col sm={4} className="d-none d-sm-block">Album</Col>
-      </Row>
-    )
-  }
-
   if (!ongoingPlaylist.id) { 
     return (
       <div>
@@ -59,30 +47,27 @@ const SongList = () => {
 
 
   return(
-    <Container>
-      <div style={songListStyle}>
-        {renderListHeader()}
-        <PlayingSong song={playingSong} />
-        <VotingSongs songs={votingSongs} />
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="songs">
-            {(provided, snapshot) => {
-              return(
-                <div className="songs" {...provided.droppableProps} ref={provided.innerRef}>
-                  {
-                    remainingSongs.map((data, id) => {
-                      return(
-                        <SongListElementDraggable rowNumber={id} data={data} index={id}/>
-                      )
-                    })
-                  }
-                  {provided.placeholder}
-                </div>
-              );
-            }}
-          </Droppable>
-        </DragDropContext>
-      </div>
+    <Container style={songListStyle}>
+      <PlayingSong song={playingSong} />
+      <VotingSongs songs={votingSongs} />
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="songs">
+          {(provided, snapshot) => {
+            return(
+              <div className="songs" {...provided.droppableProps} ref={provided.innerRef}>
+                {
+                  remainingSongs.map((data, id) => {
+                    return(
+                      <SongListElementDraggable rowNumber={id} data={data} index={id}/>
+                    )
+                  })
+                }
+                {provided.placeholder}
+              </div>
+            );
+          }}
+        </Droppable>
+      </DragDropContext>
     </Container>
   )
 }
