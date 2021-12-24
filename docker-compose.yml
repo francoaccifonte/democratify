@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: democratify-web
+    image: democratify-web
+    ports:
+      - "80:80"
+    # network_mode: "host"
+    build:
+      context: .
+      target: production
