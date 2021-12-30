@@ -7,6 +7,7 @@ export const useVotation = (accountId: number, token?: string) => {
   const dispatch = useDispatch()
 
   let votationState = useSelector((state: RootState) => state.votations)
+  const previousVotationIds = localStorage.getItem('votation_ids')?.split(',') || []
 
   useEffect(() => {
     if (!votationState.votation.id && votationState.status === 'idle') {
@@ -20,8 +21,14 @@ export const useVotation = (accountId: number, token?: string) => {
     dispatch(castVote({ accountId: accountId, token: token, candidateId: candidateId }))
   }
 
+  const reloadVotation = () => {
+    dispatch(fetchVotation({ id: accountId, token: token }))
+  }
+
   return {
     votationState,
-    voteForCandidate
+    voteForCandidate,
+    previousVotationIds,
+    reloadVotation
   }
 }

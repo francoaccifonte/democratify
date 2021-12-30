@@ -2,7 +2,7 @@ import React from 'react'
 
 type TextProps = {
   type: string;
-  color: string;
+  color?: string;
   children: React.ReactNode;
 }
 
