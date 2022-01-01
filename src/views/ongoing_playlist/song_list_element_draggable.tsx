@@ -1,4 +1,5 @@
-import SongListElement from './song_list_element';
+import React from 'react'
+import SongListElement from './song_list_element'
 import { Draggable } from 'react-beautiful-dnd'
 import { Song } from '../../types/song'
 
@@ -9,10 +10,10 @@ rowNumber: number;
 }
 
 const SongListElementDraggable = ({ rowNumber, data, index }: songListProps): JSX.Element => {
-  return(
+  return (
     <Draggable key={index.toString()} draggableId={index.toString()} index={index} >
       {(provided, snapshot) => {
-        return(
+        return (
           <div {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
             <SongListElement rowNumber={rowNumber} data={data}/>
           </div>
@@ -22,4 +23,4 @@ const SongListElementDraggable = ({ rowNumber, data, index }: songListProps): JS
   )
 }
 
-export default SongListElementDraggable;
+export default SongListElementDraggable

@@ -1,47 +1,46 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 
 import { authenticate } from '../features/slices/account_slice'
 import { RootState } from '../features/root_reducer'
 
 const LoginView = () => {
   const dispatch = useDispatch()
-  
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const accountId = useSelector((state: RootState) => state.account.id)
 
-  let history = useHistory();
+  const history = useHistory()
   useEffect(() => {
     if (accountId) {
-      history.push('/playlists');
+      history.push('/playlists')
     }
   }, [accountId, history])
 
-
   const handleLogIn = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    dispatch(authenticate({email: email, password: password}))
-  };
+    dispatch(authenticate({ email: email, password: password }))
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const id = event.target.getAttribute('id');
-    const value = event.target.value;
+    const id = event.target.getAttribute('id')
+    const value = event.target.value
     if (id === 'emailLogin') {
       setEmail(value)
     } else if (id === 'passwordLogin') {
       setPassword(value)
     }
-  };
+  }
 
   const logInComponent = () => {
-    return(
+    return (
       <>
       <Container className="mt-5">
         <Row className="justify-content-center">
@@ -66,15 +65,15 @@ const LoginView = () => {
       </Container>
       </>
     )
-  };
+  }
 
   const success = () => {
-    return(
+    return (
       <div>
         Log in successful! go to /playlists
       </div>
     )
-  };
+  }
 
   if (accountId === undefined) {
     return logInComponent()
@@ -83,4 +82,4 @@ const LoginView = () => {
   }
 }
 
-export default LoginView;
+export default LoginView

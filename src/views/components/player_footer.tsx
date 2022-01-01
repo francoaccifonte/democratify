@@ -1,3 +1,4 @@
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from 'react-router'
@@ -14,17 +15,17 @@ type PlayerFooterProps = {
 
 const PlayerFooter = (props: PlayerFooterProps) => {
   const { ongoingPlaylist } = useOngoingPlaylist()
-  const history = useHistory();
+  const history = useHistory()
   const redirect = () => history.push('/playlists/ongoing')
 
   if (!ongoingPlaylist) {
-    return(null)
+    return (null)
   }
 
   if (ongoingPlaylist.status === 'fulfilled' && ongoingPlaylist.id) {
-      return(
+    return (
         <>
-          <Container fluid onClick={redirect} style={{height: "8rem", backgroundColor: "#0B2355"}} className={`${props.className} d-flex flex-row`}>
+          <Container fluid onClick={redirect} style={{ height: '8rem', backgroundColor: '#0B2355' }} className={`${props.className} d-flex flex-row`}>
             <Col >
               <FontAwesomeIcon icon={faPlay} size="5x" color="white"/>
             </Col>
@@ -46,12 +47,12 @@ const PlayerFooter = (props: PlayerFooterProps) => {
             </Col>
           </Container>
         </>
-      )
+    )
   }
-  
+
   return (
     null
   )
 }
 
-export default PlayerFooter;
+export default PlayerFooter

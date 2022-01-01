@@ -5,13 +5,12 @@ import playlistDataReducer from './slices/playlist_data_slice'
 import votationsReducer from './slices/votation_slice'
 import { combineReducers } from 'redux'
 
-
 export const rootReducer = combineReducers({
   account: accountReducer,
   currentPlaylist: currentPlaylistReducer,
   playlists: playlistsReducer,
   playlistData: playlistDataReducer,
-  votations: votationsReducer,
+  votations: votationsReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

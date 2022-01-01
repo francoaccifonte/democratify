@@ -1,3 +1,4 @@
+import React from 'react'
 
 type TextProps = {
   type: string;
@@ -7,33 +8,32 @@ type TextProps = {
 
 const Text = (props: TextProps) => {
   const headerStyle = {
-    fontFamily: "Poppins",
-    fontStyle: "normal",
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: "2.5rem",
-    lineHeight: "3.75rem",
+    fontSize: '2.5rem',
+    lineHeight: '3.75rem'
   }
   const bodyRegularStyle = {
-    fontFamily: "Poppins",
-    fontStyle: "normal",
-    fontWeight: "normal",
-    fontSize: "1.125rem",
-    lineHeight: "1.75rem",
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '1.125rem',
+    lineHeight: '1.75rem'
   }
-  var style: any;
+  let style: any
 
-  switch(props.type) {
-    case "header":
-      style = headerStyle;
-      break;
-    case "bodyRegular":
-      style = bodyRegularStyle;
-      break;
+  switch (props.type) {
+    case 'header':
+      style = headerStyle
+      break
+    case 'bodyRegular':
+      style = bodyRegularStyle
+      break
   }
-  style.color = props.color;
+  style.color = props.color
 
   return <span style={style}>{props.children}</span>
-
 }
 
-export default Text;
+export default Text

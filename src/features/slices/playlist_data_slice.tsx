@@ -5,9 +5,9 @@ import client from '../../backend/models'
 
 export const fetchPlaylist = createAsyncThunk('playlist/show',
   async (data: {id: number}, thunkApi: any) => {
-    const response = await client.playlists.show(data.id);
-    return response.json();
-})
+    const response = await client.playlists.show(data.id)
+    return response.json()
+  })
 
 type PlaylistDataState = {
   count: number,
@@ -18,31 +18,31 @@ type PlaylistDataState = {
 const initialState: PlaylistDataState = {
   count: 0,
   playlists: [],
-  status: 'idle',
+  status: 'idle'
 }
 
 export const playlistDataSlice = createSlice({
   name: 'availablePlaylists',
   initialState,
   reducers: {
-    setCount: (state, action: PayloadAction<number>) => { state.count = action.payload },
+    setCount: (state, action: PayloadAction<number>) => { state.count = action.payload }
   },
-  extraReducers(builder) {
+  extraReducers (builder) {
     builder.addCase(fetchPlaylist.fulfilled, (state, action) => {
-      state.status = 'fulfilled';
-      var new_state = {
-        ...state.playlists,
-      };
-      new_state[action.payload.id] = action.payload;
-      state.playlists = new_state;
-      state.count = action.payload.length;
+      state.status = 'fulfilled'
+      const newState = {
+        ...state.playlists
+      }
+      newState[action.payload.id] = action.payload
+      state.playlists = newState
+      state.count = action.payload.length
     })
-    .addCase(fetchPlaylist.rejected, (state, action) => {
-      state.status = 'rejected';
-    })
-    .addCase(fetchPlaylist.pending, (state, action) => {
-      state.status = 'pending';
-    })
+      .addCase(fetchPlaylist.rejected, (state, action) => {
+        state.status = 'rejected'
+      })
+      .addCase(fetchPlaylist.pending, (state, action) => {
+        state.status = 'pending'
+      })
   }
 })
 

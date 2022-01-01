@@ -1,8 +1,8 @@
-import BaseModel from './base_model';
+import BaseModel from './base_model'
 
 class SongModel extends BaseModel {
-  modelName(): string {
-    return 'Song';
+  modelName (): string {
+    return 'Song'
   }
 }
 

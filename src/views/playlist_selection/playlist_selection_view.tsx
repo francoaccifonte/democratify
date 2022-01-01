@@ -1,32 +1,32 @@
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { List } from './index'
 import { fetchPlaylists } from '../../features/slices/playlists_slice'
 import { RootState } from '../../features/root_reducer'
-import FullHeightSkeleton from "../full_height_skeleton";
+import FullHeightSkeleton from '../full_height_skeleton'
 
 const PlaylistSelectionView = () => {
   const playlists = useSelector((state: RootState) => state.playlists)
   const account = useSelector((state: RootState) => state.account)
   const dispatch = useDispatch()
-  let history = useHistory();
+  const history = useHistory()
 
   if (!account.id) {
     history.push('/')
   }
-  
+
   useEffect(() => {
     if (!account.token) { return }
     dispatch(fetchPlaylists({}))
-  }, [account.token, dispatch]);
+  }, [account.token, dispatch])
 
-  return(
+  return (
     <FullHeightSkeleton header footer palette='admin'>
       <List playlists={playlists.playlists} history={history}/>
     </FullHeightSkeleton>
-  );
-};  
+  )
+}
 
-export default PlaylistSelectionView;
+export default PlaylistSelectionView

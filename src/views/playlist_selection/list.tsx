@@ -1,3 +1,4 @@
+import React from 'react'
 import Playlist from '../../types/playlist'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -14,15 +15,14 @@ const redirectToPlaylistShow = (playlistId: Number, history: any) => {
 }
 
 const List = (props: ListProps) => {
-  
   if (props.playlists.length > 0) {
-    return(
+    return (
       <Container>
         <Row>
           {
             props.playlists.map((data, id) => {
-              return(
-                <Col>
+              return (
+                <Col key={id}>
                   <PlaylistCard
                     id={data.id}
                     name={data.name}
@@ -38,7 +38,7 @@ const List = (props: ListProps) => {
     )
   }
 
-  return(<></>)
+  return (<></>)
 }
 
-export default List;
+export default List

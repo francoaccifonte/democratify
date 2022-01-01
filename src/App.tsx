@@ -1,37 +1,37 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { RootState } from './features/root_reducer'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 
-import './App.css';
-import OngoingPlaylistView from './views/ongoing_playlist/ongoing_playlist_view';
-import LoginView from './views/login_view';
-import PlaylistSelectionView from './views/playlist_selection/playlist_selection_view';
-import PlaylistShowView from './views/playlist_show_view/playlist_show_view';
+import './App.css'
+import OngoingPlaylistView from './views/ongoing_playlist/ongoing_playlist_view'
+import LoginView from './views/login_view'
+import PlaylistSelectionView from './views/playlist_selection/playlist_selection_view'
+import PlaylistShowView from './views/playlist_show_view/playlist_show_view'
 import VotationView from './views/votation/votation_view'
 import client from './backend/models/'
 import { authenticate } from './features/slices/account_slice'
 
-function App() {
+function App () {
   let { token, id } = useSelector((state: RootState) => state.account)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   // TODO: Move elsewhere this logic, and remove the useAuth file, or fix it so it goes there.
   if (!client.token) {
     if (!token) {
-      token = localStorage.getItem("account_token") || undefined;
+      token = localStorage.getItem('account_token') || undefined
     }
     if (token) {
-      client.setToken(token);
+      client.setToken(token)
     }
   }
   const loggedIn = !!token
 
   if (loggedIn && !id) {
-    dispatch(authenticate({token: token}))
+    dispatch(authenticate({ token: token }))
   }
 
-  return(
+  return (
       <Router>
         <Switch>
           <Route exact path="/" component={LoginView} />
@@ -44,4 +44,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

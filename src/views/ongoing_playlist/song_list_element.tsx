@@ -1,3 +1,4 @@
+import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
@@ -6,7 +7,7 @@ import { RootState } from '../../features/root_reducer'
 import { Song } from '../../types/song'
 import Text from '../components/text'
 
-import { adminPalette } from "../../color_palette"
+import { adminPalette } from '../../color_palette'
 
 type songListProps = {
   rowNumber: number;
@@ -17,9 +18,9 @@ const SongListElement = ({ rowNumber, data }: songListProps): JSX.Element => {
   const candidatePool = useSelector((state: RootState) => state.currentPlaylist.candidatePoolSize)
   const color = rowNumber < candidatePool ? adminPalette.Success : adminPalette.Secondary
 
-  return(
+  return (
     <>
-      <Row className={'my-2 px-2 py-2'} style={{backgroundColor: color}}>
+      <Row className={'my-2 px-2 py-2'} style={{ backgroundColor: color }}>
         <Col lg={1}>
           <Image src={data.cover_art[2].url} alt="album art" roundedCircle/>
         </Col>
@@ -37,4 +38,4 @@ const SongListElement = ({ rowNumber, data }: songListProps): JSX.Element => {
   )
 }
 
-export default SongListElement;
+export default SongListElement

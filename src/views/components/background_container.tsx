@@ -1,3 +1,4 @@
+import React from 'react'
 import Container from 'react-bootstrap/Container'
 import { findColor, ColorProps, adminPalette } from '../../color_palette'
 
@@ -7,14 +8,14 @@ type BackgroundContainerProps = {
 }
 
 const BackgroundContainer = (props: BackgroundContainerProps) => {
-  const {palette} = props.backgroundColor;
+  const { palette } = props.backgroundColor
   const color = 'Light'
-  const backgroundColor = findColor({palette, color}) || adminPalette.Light;
+  const backgroundColor = findColor({ palette, color }) || adminPalette.Light
 
-  return(
-    <Container 
+  return (
+    <Container
       className="d-flex flex-column"
-      style={{padding: "0" ,background: backgroundColor, height: "100vh", overflowY:"hidden", alignItems: "flex-start"}}
+      style={{ padding: '0', background: backgroundColor, height: '100vh', overflowY: 'hidden', alignItems: 'flex-start' }}
       fluid
     >
       {props.children}
@@ -22,4 +23,4 @@ const BackgroundContainer = (props: BackgroundContainerProps) => {
   )
 }
 
-export default BackgroundContainer;
+export default BackgroundContainer

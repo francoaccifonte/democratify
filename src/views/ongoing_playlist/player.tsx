@@ -1,3 +1,4 @@
+import React from 'react'
 import Image from 'react-bootstrap/Image'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
@@ -11,12 +12,12 @@ import { useOngoingPlaylist } from '../../hooks/useOngoingPlaylist'
 
 const Player = () => {
   const { ongoingPlaylist } = useOngoingPlaylist()
-  const candidatePoolSize = ongoingPlaylist.candidatePoolSize;
-  const dispatch = useDispatch();
+  const candidatePoolSize = ongoingPlaylist.candidatePoolSize
+  const dispatch = useDispatch()
   const image = ongoingPlaylist.playingSong?.cover_art[1].url
-  return(
+  return (
     <Container>
-      <Image src={image} alt={"asdfg"} rounded fluid/>
+      <Image src={image} alt={'asdfg'} rounded fluid/>
 
       <Container className="bg-secondary mt-4 pt-2 rounded">
         <Row className="justify-content-md-center">Candidate songs: {candidatePoolSize}</Row>
@@ -28,7 +29,7 @@ const Player = () => {
 
       <SpotifyLoginButton />
     </Container>
-    )
+  )
 }
 
-export default Player;
+export default Player

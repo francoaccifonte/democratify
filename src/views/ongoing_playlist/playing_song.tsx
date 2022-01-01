@@ -1,9 +1,10 @@
+import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import { Song } from '../../types/song'
 import Text from '../components/text'
-import { adminPalette } from "../../color_palette"
+import { adminPalette } from '../../color_palette'
 
 type PlayingSongProps = {
   song?: Song;
@@ -14,9 +15,9 @@ const PlayingSong = (props: PlayingSongProps) => {
 
   if (!song) { return null }
 
-  return(
+  return (
     <>
-      <Row className={"my-2 px-2 py-2"} style={{backgroundColor: adminPalette.Primary}}>
+      <Row className={'my-2 px-2 py-2'} style={{ backgroundColor: adminPalette.Primary }}>
         <Col lg={1}>
           <Image src={song.cover_art[2].url} alt="album art" roundedCircle/>
         </Col>
@@ -34,4 +35,4 @@ const PlayingSong = (props: PlayingSongProps) => {
   )
 }
 
-export default PlayingSong;
+export default PlayingSong

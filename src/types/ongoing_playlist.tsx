@@ -1,6 +1,6 @@
-import { Song } from './song';
-import Account from './account'; 
-import Playlist from './playlist';
+import { Song } from './song'
+import Account from './account'
+import Playlist from './playlist'
 
 export type OngoingPlaylist ={
   id?: number,

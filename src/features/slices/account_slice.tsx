@@ -9,15 +9,15 @@ export const authenticate = createAsyncThunk('account/authenticate',
   async (loginData: { email?: string, password?: string, token?: string }, thunkApi: any) => {
     const loginAction = async (data: typeof loginData) => {
       if (data.email && data.password) {
-        return client.account.authenticate(data.email, data.password);
+        return client.account.authenticate(data.email, data.password)
       } else if (data.token) {
-        client.token = data.token;
-        return client.account.me();
+        client.token = data.token
+        return client.account.me()
       }
-      throw new Error('Unexpected login event occured');
+      throw new Error('Unexpected login event occured')
     }
-    
-    const resultPromise = Promise.resolve(await loginAction(loginData));
+
+    const resultPromise = Promise.resolve(await loginAction(loginData))
 
     resultPromise.then((result) => {
       // I think this was a hack, im not removing the comments yet but i might have to
@@ -25,7 +25,7 @@ export const authenticate = createAsyncThunk('account/authenticate',
       // thunkApi.dispatch(fetchPlaylists);
     })
     return resultPromise
-})
+  })
 
 type AccountState = Account & {
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected'
@@ -35,7 +35,7 @@ const initialState: AccountState = {
   id: undefined,
   token: undefined,
   tokenExpiration: undefined,
-  status: 'idle',
+  status: 'idle'
 }
 
 export const accountSlice = createSlice({
@@ -43,31 +43,31 @@ export const accountSlice = createSlice({
   initialState,
   reducers: {
     setAccountId: (state, action: PayloadAction<number>) => {
-      state.id = action.payload;
+      state.id = action.payload
     },
     setToken: (state, action: PayloadAction<string>) => {
-      client.token = action.payload;
-      state.token = action.payload;
+      client.token = action.payload
+      state.token = action.payload
     },
     setTokenExpiration: (state, action: PayloadAction<string>) => {
-      state.tokenExpiration = action.payload;
-    },
+      state.tokenExpiration = action.payload
+    }
   },
-  extraReducers(builder) {
+  extraReducers (builder) {
     builder.addCase(authenticate.fulfilled, (state, action) => {
-      state.status = 'fulfilled';
-      state.id = action.payload.id;
-      state.token = action.payload.token;
-      localStorage.setItem('account_token', action.payload.token);
+      state.status = 'fulfilled'
+      state.id = action.payload.id
+      state.token = action.payload.token
+      localStorage.setItem('account_token', action.payload.token)
     })
-    .addCase(authenticate.rejected, (state, action) => {
-      state.status = 'rejected';
-      state.id = undefined;
-      state.token = undefined;
-    })
-    .addCase(authenticate.pending, (state, action) => {
-      state.status = 'pending';
-    })
+      .addCase(authenticate.rejected, (state, action) => {
+        state.status = 'rejected'
+        state.id = undefined
+        state.token = undefined
+      })
+      .addCase(authenticate.pending, (state, action) => {
+        state.status = 'pending'
+      })
   }
 })
 
