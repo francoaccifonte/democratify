@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ThemeProvider } from 'react-jss'
 
 import FullHeightSkeleton from '../full_height_skeleton'
-import { SignupCard } from '.'
+import { SignupCard, SignupSuccessCard } from '.'
 import { adminPalette } from '../../color_palette'
 
 type SignupForm = {
@@ -21,7 +21,7 @@ const SignupView = () => {
       case '0':
         return <SignupCard />
       case '1':
-        return <></>
+        return <SignupSuccessCard />
     }
   }
   return (
@@ -29,7 +29,7 @@ const SignupView = () => {
       <FullHeightSkeleton header palette='admin' overflowY="hidden">
         <div className="mt-5 d-flex flex-row justify-content-center w-100">
           <div >
-            <SignupCard />
+            <Content />
           </div>
         </div>
       </FullHeightSkeleton>
