@@ -1,39 +1,34 @@
-import React, { useState } from 'react'
-import { ThemeProvider } from 'react-jss'
+import React from 'react'
 
 import FullHeightSkeleton from '../full_height_skeleton'
 import { SignupCard, SignupSuccessCard } from '.'
-import { adminPalette } from '../../color_palette'
-
-type SignupForm = {
-  user?: string,
-  password: string,
-  email: string,
-} | null
-type Steps = '0' | '1'
+import useAuth from '../../hooks/useAuth'
 
 const SignupView = () => {
-  const [formData, setFormData] = useState<SignupForm>()
-  const [step, setStep] = useState<Steps>('0')
+  const { signUpState } = useAuth()
 
   const Content = () => {
-    switch (step) {
-      case '0':
+    switch (signUpState) {
+      case 'idle':
+      case 'pending':
         return <SignupCard />
-      case '1':
+      case 'fulfilled':
         return <SignupSuccessCard />
+      case 'rejected':
+        return <></>
+        // TODO: Show error message
+      default:
+        return <></>
     }
   }
   return (
-    <ThemeProvider theme={adminPalette} >
-      <FullHeightSkeleton header palette='admin' overflowY="hidden">
-        <div className="mt-5 d-flex flex-row justify-content-center w-100">
-          <div >
-            <Content />
-          </div>
+    <FullHeightSkeleton header palette='admin' overflowY="hidden">
+      <div className="mt-5 d-flex flex-row justify-content-center w-100">
+        <div >
+          <Content />
         </div>
-      </FullHeightSkeleton>
-    </ThemeProvider>
+      </div>
+    </FullHeightSkeleton>
   )
 }
 

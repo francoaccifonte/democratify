@@ -1,45 +1,38 @@
-import { useContext, createContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { authenticate } from '../features/slices/account_slice'
+import { authenticate, signUp } from '../features/slices/account_slice'
 import { RootState } from '../features/root_reducer'
+import client from '../backend/models/'
 
-type ContextProps = {
-  token: string | undefined;
-  loggedIn: boolean;
-}
-
-const authContext = createContext({ token: 'initialTokenState', loggedIn: false } as ContextProps)
-
-export const useProvideAuth = () => {
+const useAuth = () => {
+  // Handle token from local storage into redux state and backend client
+  let { token, id } = useSelector((state: RootState) => state.account)
+  const signUpState = useSelector((state: RootState) => state.account.accountCreationStatus)
   const dispatch = useDispatch()
-  const { id, token, tokenExpiration } = useSelector((state: RootState) => state.account)
-  const localStorageToken = localStorage.getItem('account_token')
-  let loggedIn: boolean
 
-  if ((token && !id) && (token !== 'initialTokenState')) {
+  if (!client.token) {
+    if (!token) {
+      token = localStorage.getItem('account_token') || undefined
+    }
+    if (token) {
+      client.setToken(token)
+    }
+  }
+  const loggedIn = !!token
+
+  if (loggedIn && !id) {
     dispatch(authenticate({ token: token }))
-    loggedIn = true
-  } else if (!token && localStorageToken) {
-    dispatch(authenticate({ token: localStorageToken }))
-    loggedIn = true
-  } else {
-    loggedIn = false
+  }
+
+  // Create new account
+  const signUpAction = (signUpData: { email: string, password: string, name: string }) => {
+    dispatch(signUp(signUpData))
   }
 
   return {
-    token,
-    loggedIn
+    signUp: signUpAction,
+    signUpState
   }
 }
 
-type ProvideAuthProps = { children: any };
-
-export const ProvideAuth = (props: ProvideAuthProps) => {
-  const auth = useProvideAuth()
-  return <authContext.Provider value={auth}>{props.children}</authContext.Provider>
-}
-
-export const useAuth = () => {
-  return useContext(authContext)
-}
+export default useAuth

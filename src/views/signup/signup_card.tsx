@@ -6,6 +6,7 @@ import withStyles from 'react-jss'
 import { useHistory } from 'react-router-dom'
 
 import Text from '../components/text'
+import useAuth from '../../hooks/useAuth'
 
 const styles = (theme: any) => {
   return {
@@ -33,7 +34,10 @@ const styles = (theme: any) => {
     },
     formInputDanger: {
       composes: '$formInput',
-      color: theme.Danger
+      color: theme.Danger,
+      '&:focus': {
+        color: theme.Danger
+      }
     },
     submitButton: {
       backgroundColor: theme.Info,
@@ -49,40 +53,47 @@ type SignupCardProps = { classes: any };
 const SignupCard = (props: SignupCardProps) => {
   const { classes } = props
   const history = useHistory()
+  const { signUp, signUpState } = useAuth()
 
-  const [validPassword, setValidPassword] = useState(true)
-
-  const [userValue, setUserValue] = useState('')
+  const [userValue, setUserValue] = useState<string>('')
   const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setUserValue(event.target.value)
   }
 
-  const [passwordValue, setPasswordValue] = useState('')
+  const [passwordValue, setPasswordValue] = useState<string>('')
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setPasswordValue(event.target.value)
   }
 
-  const [repeatPasswordValue, setRepeatPasswordValue] = useState('')
+  const [repeatPasswordValue, setRepeatPasswordValue] = useState<string>('')
   const handleRepeatPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setRepeatPasswordValue(event.target.value)
-    if (passwordValue !== event.target.value) {
-      setValidPassword(false)
-    } else {
-      setValidPassword(true)
-    }
   }
 
-  const [emailValue, setEmailValue] = useState('')
+  const [emailValue, setEmailValue] = useState<string>('')
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setEmailValue(event.target.value)
   }
 
-  const handleSubmit = () => {
+  const validPassword = () => {
+    if ((passwordValue.length < 1) || (passwordValue !== repeatPasswordValue)) { return false }
+    return true
+  }
+  const isDataValid = () => {
+    if (!validPassword()) { return false }
+    if (!emailValue.includes('@')) { return false }
 
+    return true
+  }
+  const handleSubmit = (event: any) => {
+    event.preventDefault()
+    if (isDataValid()) {
+      signUp({ email: emailValue, password: passwordValue, name: userValue })
+    }
   }
 
   return (
@@ -95,12 +106,12 @@ const SignupCard = (props: SignupCardProps) => {
             <Text type="bodyCaption" color="White">
               USUARIO
             </Text>
-            <input type="password" value={passwordValue} onChange={handlePasswordChange} className={validPassword ? classes.formInput : classes.formInputDanger}/>
+            <input type="password" value={passwordValue} onChange={handlePasswordChange} className={validPassword() ? classes.formInput : classes.formInputDanger}/>
             <br />
             <Text type="bodyCaption" color="White">
               CONTRASEÑA
             </Text>
-            <input type="password" value={repeatPasswordValue} onChange={handleRepeatPasswordChange} className={validPassword ? classes.formInput : classes.formInputDanger}/>
+            <input type="password" value={repeatPasswordValue} onChange={handleRepeatPasswordChange} className={validPassword() ? classes.formInput : classes.formInputDanger}/>
             <br />
             <Text type="bodyCaption" color="White">
               CONFIRMAR CONTRASEÑA
@@ -113,8 +124,12 @@ const SignupCard = (props: SignupCardProps) => {
           </form>
           </Card.Body>
           <Card.Body className="text-center">
-            <Button className={classes.submitButton} onClick={handleSubmit}>
-              <Text type="title" color="Black">Enviar</Text>
+            <Button className={classes.submitButton} onClick={handleSubmit} disabled={!isDataValid() && signUpState !== 'pending'}>
+              { signUpState !== 'pending' && <Text type="title" color="Black">Enviar</Text>}
+              { signUpState === 'pending' &&
+              <div className="spinner-border" role="status">
+                <span className="sr-only"></span>
+              </div>}
             </Button>
             <br />
             <Text type="bodyRegular" color="White">Ya tenes cuenta? </Text>

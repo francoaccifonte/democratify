@@ -41,16 +41,16 @@ const SignupSuccessCard = (props: SignupSuccessCardProps) => {
 
   return (
     <Container className={classes.container}>
-        <Card className={classes.card}>
-          <Card.Body className="text-left">
-            <div className={classes.iconContainer}>
-              <FontAwesomeIcon icon={faCheckCircle} className={classes.icon}/>
-              <Text type="bodyCaption" color="White">¡Listo! Ya podes loguearte con tu cuenta.</Text>
-              <Text type="link" color="White" onClick={() => history.push('/login')}>Entrar</Text>
-            </div>
-          </Card.Body>
-        </Card>
-      </Container>
+      <Card className={classes.card}>
+        <Card.Body className="text-left">
+          <div className={classes.iconContainer}>
+            <FontAwesomeIcon icon={faCheckCircle} className={classes.icon}/>
+            <Text type="bodyCaption" color="White">¡Listo! Ya podes loguearte con tu cuenta.</Text>
+            <Text type="link" color="White" onClick={() => history.push('/login')}>Entrar</Text>
+          </div>
+        </Card.Body>
+      </Card>
+    </Container>
   )
 }
 
