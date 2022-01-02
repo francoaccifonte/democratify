@@ -49,17 +49,21 @@ type SignupCardProps = { classes: any };
 const SignupCard = (props: SignupCardProps) => {
   const { classes } = props
   const history = useHistory()
+
+  const [validPassword, setValidPassword] = useState(true)
+
   const [userValue, setUserValue] = useState('')
   const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setUserValue(event.target.value)
   }
-  const [validPassword, setValidPassword] = useState(true)
+
   const [passwordValue, setPasswordValue] = useState('')
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setPasswordValue(event.target.value)
   }
+
   const [repeatPasswordValue, setRepeatPasswordValue] = useState('')
   const handleRepeatPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
@@ -70,6 +74,7 @@ const SignupCard = (props: SignupCardProps) => {
       setValidPassword(true)
     }
   }
+
   const [emailValue, setEmailValue] = useState('')
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()

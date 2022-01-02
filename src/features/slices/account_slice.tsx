@@ -1,6 +1,3 @@
-// import fetchOngoingPlaylist from './current_playlist_slice'
-// import fetchPlaylists from './playlists_slice'
-
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 import client from '../../backend/models/'
 import Account from '../../types/account'
@@ -27,15 +24,22 @@ export const authenticate = createAsyncThunk('account/authenticate',
     return resultPromise
   })
 
+export const signUp = createAsyncThunk('account/signUp',
+  async (signUpData: { email: string, password: string, name: string }, thunkApi: any) => {
+    return client.account.signUp(signUpData.email, signUpData.password, signUpData.name)
+  }
+)
 type AccountState = Account & {
-  status: 'idle' | 'pending' | 'fulfilled' | 'rejected'
+  status: 'idle' | 'pending' | 'fulfilled' | 'rejected',
+  accountCreationStatus: 'idle' | 'pending' | 'fulfilled' | 'rejected'
 }
 
 const initialState: AccountState = {
   id: undefined,
   token: undefined,
   tokenExpiration: undefined,
-  status: 'idle'
+  status: 'idle',
+  accountCreationStatus: 'idle'
 }
 
 export const accountSlice = createSlice({
@@ -67,6 +71,15 @@ export const accountSlice = createSlice({
       })
       .addCase(authenticate.pending, (state, action) => {
         state.status = 'pending'
+      })
+      .addCase(signUp.fulfilled, (state, action) => {
+        state.accountCreationStatus = 'fulfilled'
+      })
+      .addCase(signUp.pending, (state, action) => {
+        state.accountCreationStatus = 'pending'
+      })
+      .addCase(signUp.rejected, (state, action) => {
+        state.accountCreationStatus = 'rejected'
       })
   }
 })

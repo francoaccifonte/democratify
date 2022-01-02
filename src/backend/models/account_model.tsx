@@ -21,6 +21,17 @@ class AccountModel extends BaseModel {
 
     return account.json()
   }
+
+  async signUp (email: string, password: string, name: string): Promise<any> {
+    const body = {
+      email: email,
+      password: password,
+      name: name
+    }
+    const account: any = await this.post(body, '/signup')
+
+    return account.json()
+  }
 }
 
 export { AccountModel }
