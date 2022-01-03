@@ -7,8 +7,7 @@ import Row from 'react-bootstrap/Row'
 import { useDispatch } from 'react-redux'
 
 import { incrementPoolSize, decrementPoolSize } from '../../features/slices/current_playlist_slice'
-import SpotifyLoginButton from '../components/spotify_login_button'
-import { useOngoingPlaylist } from '../../hooks/useOngoingPlaylist'
+import { useOngoingPlaylist } from '../../hooks'
 
 const Player = () => {
   const { ongoingPlaylist } = useOngoingPlaylist()
@@ -26,8 +25,6 @@ const Player = () => {
           <Button variant="info" onClick={() => dispatch(incrementPoolSize())}>+</Button>
         </ButtonGroup>
       </Container>
-
-      <SpotifyLoginButton />
     </Container>
   )
 }

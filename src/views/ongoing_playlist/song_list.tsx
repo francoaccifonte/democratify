@@ -6,7 +6,7 @@ import CSS from 'csstype'
 
 import { parseFromPlaylistReorderer, updateInBackend } from '../../features/slices/current_playlist_slice'
 import SongListElementDraggable from './song_list_element_draggable'
-import { useOngoingPlaylist } from '../../hooks/useOngoingPlaylist'
+import { useOngoingPlaylist } from '../../hooks'
 import PlayingSong from './playing_song'
 import VotingSongs from './voting_songs'
 

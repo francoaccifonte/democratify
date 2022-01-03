@@ -7,13 +7,16 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 
-import { useOngoingPlaylist } from '../../hooks/useOngoingPlaylist'
-import { usePlaylist } from '../../hooks/usePlaylist'
+import { useRedirects, usePlaylist, useOngoingPlaylist } from '../../hooks'
 import FullHeightSkeleton from '../full_height_skeleton'
 
 type TParams = { id: string };
 
 const PlaylistShowView = ({ match }: RouteComponentProps<TParams>) => {
+  const redirects = useRedirects()
+  redirects.redirectBySpotifyUser()
+  redirects.redirectToLoginIfNotLoggedIn()
+
   const routeId = Number(match.params.id)
   const { ongoingPlaylist, startPlaylist } = useOngoingPlaylist()
   const { playlist, requestStatus } = usePlaylist(routeId)

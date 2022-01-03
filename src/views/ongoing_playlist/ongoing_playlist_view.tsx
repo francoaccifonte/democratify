@@ -7,7 +7,7 @@ import Player from './player'
 import SongList from './song_list'
 import FullHeightSkeleton from '../full_height_skeleton'
 import { RootState } from '../../features/root_reducer'
-import { useVotation } from '../../hooks/useVotation'
+import { useVotation } from '../../hooks'
 
 const OngoingPlaylistView = () => {
   const history = useHistory()
@@ -21,7 +21,7 @@ const OngoingPlaylistView = () => {
     }
   }, [reloadVotation, votationState])
   if (!account.id && ['rejected', 'fullfilled'].includes(account.status)) {
-    history.push('/')
+    history.push('/login')
   }
 
   return (

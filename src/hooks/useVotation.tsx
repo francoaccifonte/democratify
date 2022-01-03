@@ -3,7 +3,7 @@ import { RootState } from '../features/root_reducer'
 import { fetchVotation, castVote } from '../features/slices/votation_slice'
 import { useEffect } from 'react'
 
-export const useVotation = (accountId: number, token?: string) => {
+const useVotation = (accountId: number, token?: string) => {
   const dispatch = useDispatch()
 
   let votationState = useSelector((state: RootState) => state.votations)
@@ -32,3 +32,5 @@ export const useVotation = (accountId: number, token?: string) => {
     reloadVotation
   }
 }
+
+export default useVotation

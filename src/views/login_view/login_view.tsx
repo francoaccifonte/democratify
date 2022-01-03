@@ -6,12 +6,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import withStyles from 'react-jss'
 
-import { authenticate } from '../features/slices/account_slice'
-import { RootState } from '../features/root_reducer'
-import useAuth from '../hooks/useAuth'
-import Text from './components/text'
-import LoadingSpinner from './components/loading_spinner'
-import FullHeightSkeleton from './full_height_skeleton'
+import { authenticate } from '../../features/slices/account_slice'
+import { RootState } from '../../features/root_reducer'
+import useAuth from '../../hooks/useAuth'
+import Text from '../components/text'
+import LoadingSpinner from '../components/loading_spinner'
+import FullHeightSkeleton from '../full_height_skeleton'
 
 const styles = (theme: any) => {
   return {

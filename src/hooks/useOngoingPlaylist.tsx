@@ -3,7 +3,7 @@ import { RootState } from '../features/root_reducer'
 import { startOngoingPlaylist, fetchOngoingPlaylist } from '../features/slices/current_playlist_slice'
 import { useEffect } from 'react'
 
-export const useOngoingPlaylist = () => {
+const useOngoingPlaylist = () => {
   const dispatch = useDispatch()
   const startPlaylist = (playlistId: number, songId?: number) => dispatch(startOngoingPlaylist({ playlistId, songId }))
 
@@ -21,3 +21,5 @@ export const useOngoingPlaylist = () => {
     startPlaylist
   }
 }
+
+export default useOngoingPlaylist

@@ -62,6 +62,7 @@ export const accountSlice = createSlice({
       state.status = 'fulfilled'
       state.id = action.payload.id
       state.token = action.payload.token
+      state.spotifyUsers = action.payload.spotify_users
       localStorage.setItem('account_token', action.payload.token)
     })
       .addCase(authenticate.rejected, (state, action) => {
