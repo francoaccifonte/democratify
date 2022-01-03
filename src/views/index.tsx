@@ -4,4 +4,5 @@ export { default as PlaylistShowView } from './playlist_show_view/playlist_show_
 export { default as SignupView } from './signup/signup_view'
 export { default as StreamingAuthorizationView } from './streaming_authorization_view/streaming_authorization_view'
 export { default as VotationView } from './votation/votation_view'
+export { default as LandingView } from './landing_view/landing_view'
 export { default as LoginView } from './login_view/login_view'

@@ -13,7 +13,10 @@ import FullHeightSkeleton from '../full_height_skeleton'
 type TParams = { id: string };
 
 const PlaylistShowView = ({ match }: RouteComponentProps<TParams>) => {
-  useRedirects().redirectBySpotifyUser()
+  const redirects = useRedirects()
+  redirects.redirectBySpotifyUser()
+  redirects.redirectToLoginIfNotLoggedIn()
+
   const routeId = Number(match.params.id)
   const { ongoingPlaylist, startPlaylist } = useOngoingPlaylist()
   const { playlist, requestStatus } = usePlaylist(routeId)

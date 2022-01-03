@@ -13,7 +13,8 @@ import {
   PlaylistSelectionView,
   PlaylistShowView,
   StreamingAuthorizationView,
-  VotationView
+  VotationView,
+  LandingView
 } from './views'
 
 function App () {
@@ -22,6 +23,7 @@ function App () {
     <ThemeProvider theme={adminPalette}>
       <Router>
         <Switch>
+          <Route exact path="/" component={LandingView} />
           <Route exact path="/login" component={LoginView} />
           <Route exact path="/signup" component={SignupView} />
           <Route exact path="/register_users" component={StreamingAuthorizationView} />
