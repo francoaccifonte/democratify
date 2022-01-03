@@ -7,7 +7,7 @@ import client from '../backend/models/'
 const useAuth = () => {
   // Handle token from local storage into redux state and backend client
   let { token, id } = useSelector((state: RootState) => state.account)
-  const signUpState = useSelector((state: RootState) => state.account.accountCreationStatus)
+  const { status, accountCreationStatus } = useSelector((state: RootState) => state.account)
   const dispatch = useDispatch()
 
   if (!client.token) {
@@ -18,7 +18,7 @@ const useAuth = () => {
       client.setToken(token)
     }
   }
-  const loggedIn = !!token
+  const loggedIn = (token !== undefined)
 
   if (loggedIn && !id) {
     dispatch(authenticate({ token: token }))
@@ -31,7 +31,8 @@ const useAuth = () => {
 
   return {
     signUp: signUpAction,
-    signUpState
+    signUpState: accountCreationStatus,
+    logInState: status
   }
 }
 

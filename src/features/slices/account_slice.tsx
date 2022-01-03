@@ -8,7 +8,7 @@ export const authenticate = createAsyncThunk('account/authenticate',
       if (data.email && data.password) {
         return client.account.authenticate(data.email, data.password)
       } else if (data.token) {
-        client.token = data.token
+        client.setToken(data.token)
         return client.account.me()
       }
       throw new Error('Unexpected login event occured')

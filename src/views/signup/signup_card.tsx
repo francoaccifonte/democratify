@@ -6,6 +6,7 @@ import withStyles from 'react-jss'
 import { useHistory } from 'react-router-dom'
 
 import Text from '../components/text'
+import LoadingSpinner from '../components/loading_spinner'
 import useAuth from '../../hooks/useAuth'
 
 const styles = (theme: any) => {
@@ -126,10 +127,7 @@ const SignupCard = (props: SignupCardProps) => {
           <Card.Body className="text-center">
             <Button className={classes.submitButton} onClick={handleSubmit} disabled={!isDataValid() && signUpState !== 'pending'}>
               { signUpState !== 'pending' && <Text type="title" color="Black">Enviar</Text>}
-              { signUpState === 'pending' &&
-              <div className="spinner-border" role="status">
-                <span className="sr-only"></span>
-              </div>}
+              { signUpState === 'pending' && <LoadingSpinner />}
             </Button>
             <br />
             <Text type="bodyRegular" color="White">Ya tenes cuenta? </Text>
