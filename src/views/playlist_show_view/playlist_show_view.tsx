@@ -7,8 +7,7 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 
-import { useOngoingPlaylist } from '../../hooks/useOngoingPlaylist'
-import { usePlaylist } from '../../hooks/usePlaylist'
+import { usePlaylist, useOngoingPlaylist } from '../../hooks'
 import FullHeightSkeleton from '../full_height_skeleton'
 
 type TParams = { id: string };

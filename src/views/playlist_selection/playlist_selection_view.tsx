@@ -14,7 +14,7 @@ const PlaylistSelectionView = () => {
   const history = useHistory()
 
   if (!account.id) {
-    history.push('/')
+    history.push('/login')
   }
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import moment from 'moment'
 
 import Text from '../components/text'
-import { useVotation } from '../../hooks/useVotation'
+import { useVotation } from '../../hooks'
 import CandidateElement from './candidate_item'
 import FullHeigthSkeleton from '../full_height_skeleton'
 
