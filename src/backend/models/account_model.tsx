@@ -8,8 +8,11 @@ class AccountModel extends BaseModel {
   // TODO: properly type this
   async me (): Promise<any> {
     const response = await this.get('/me')
-
-    return response.json()
+    if (response.status === 200) {
+      return response.json()
+    } else {
+      return Promise.reject(response)
+    }
   }
 
   async authenticate (email: string, password: string): Promise<any> {
@@ -18,6 +21,20 @@ class AccountModel extends BaseModel {
       password: password
     }
     const account: any = await this.post(body, '/login')
+    if (account.status === 200) {
+      return account.json()
+    } else {
+      return Promise.reject(account)
+    }
+  }
+
+  async signUp (email: string, password: string, name: string): Promise<any> {
+    const body = {
+      email: email,
+      password: password,
+      name: name
+    }
+    const account: any = await this.post(body, '/signup')
 
     return account.json()
   }

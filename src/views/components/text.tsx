@@ -2,8 +2,9 @@ import React from 'react'
 
 type TextProps = {
   type: string;
-  color: string;
+  color?: string;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 const Text = (props: TextProps) => {
@@ -14,12 +15,37 @@ const Text = (props: TextProps) => {
     fontSize: '2.5rem',
     lineHeight: '3.75rem'
   }
+  const titleStyle = {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '1rem',
+    lineHeight: '1.5rem'
+  }
   const bodyRegularStyle = {
     fontFamily: 'Poppins',
     fontStyle: 'normal',
-    fontWeight: 'normal',
+    fontWeight: '400',
     fontSize: '1.125rem',
     lineHeight: '1.75rem'
+  }
+  const bodyCaptionStyle = {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '0.75rem',
+    lineHeight: '1.125rem'
+  }
+  const linkStyle = {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: '1.125rem',
+    lineHeight: '1.75rem',
+    cursor: 'pointer',
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
   let style: any
 
@@ -27,13 +53,22 @@ const Text = (props: TextProps) => {
     case 'header':
       style = headerStyle
       break
+    case 'title':
+      style = titleStyle
+      break
     case 'bodyRegular':
       style = bodyRegularStyle
+      break
+    case 'bodyCaption':
+      style = bodyCaptionStyle
+      break
+    case 'link':
+      style = linkStyle
       break
   }
   style.color = props.color
 
-  return <span style={style}>{props.children}</span>
+  return <span style={style} onClick={props.onClick}>{props.children}</span>
 }
 
 export default Text

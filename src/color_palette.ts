@@ -8,7 +8,8 @@ const adminPalette = {
   Light: '#203661',
   Dark: '#000000',
   Muted: '#5571AA',
-  White: '#FFFFFF'
+  White: '#FFFFFF',
+  Black: '#000000'
 }
 
 const userPalette = {
@@ -21,7 +22,8 @@ const userPalette = {
   Light: '#770B5F',
   Dark: '#000000',
   Muted: '#AA1E8B',
-  White: '#FFFFFF'
+  White: '#FFFFFF',
+  Black: '#000000'
 }
 
 type Palettes = 'admin' | 'user';

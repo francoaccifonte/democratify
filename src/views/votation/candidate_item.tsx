@@ -11,11 +11,16 @@ type CandidateElementProps = {
   key: number,
   onSelect: Function,
   selected?: number,
+  disabled?: boolean,
 };
 
 const CandidateElement = (props: CandidateElementProps) => {
   const isSelected = props.selected === props.data.id
-  const backgroundColor = isSelected ? '#3CA1FF' : '#E782D1'
+  const backgroundColor = props.disabled
+    ? '#3CA1FF'
+    : isSelected
+      ? '#3CA1FF'
+      : '#E782D1'
   return (
 
     <Container className="my-4 py-2 rounded-3" style={{ background: backgroundColor }} >

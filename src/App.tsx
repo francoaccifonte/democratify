@@ -1,46 +1,33 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { RootState } from './features/root_reducer'
-import { useSelector, useDispatch } from 'react-redux'
+import { ThemeProvider } from 'react-jss'
 
 import './App.css'
+import { adminPalette } from './color_palette'
+import useAuth from './hooks/useAuth'
+
 import OngoingPlaylistView from './views/ongoing_playlist/ongoing_playlist_view'
 import LoginView from './views/login_view'
+import SignupView from './views/signup/signup_view'
 import PlaylistSelectionView from './views/playlist_selection/playlist_selection_view'
 import PlaylistShowView from './views/playlist_show_view/playlist_show_view'
 import VotationView from './views/votation/votation_view'
-import client from './backend/models/'
-import { authenticate } from './features/slices/account_slice'
 
 function App () {
-  let { token, id } = useSelector((state: RootState) => state.account)
-  const dispatch = useDispatch()
-
-  // TODO: Move elsewhere this logic, and remove the useAuth file, or fix it so it goes there.
-  if (!client.token) {
-    if (!token) {
-      token = localStorage.getItem('account_token') || undefined
-    }
-    if (token) {
-      client.setToken(token)
-    }
-  }
-  const loggedIn = !!token
-
-  if (loggedIn && !id) {
-    dispatch(authenticate({ token: token }))
-  }
-
+  useAuth()
   return (
+    <ThemeProvider theme={adminPalette}>
       <Router>
         <Switch>
-          <Route exact path="/" component={LoginView} />
+          <Route exact path="/login" component={LoginView} />
+          <Route exact path="/signup" component={SignupView} />
           <Route exact path="/playlists" component={PlaylistSelectionView} />
           <Route exact path="/playlists/ongoing" component={OngoingPlaylistView} />
           <Route exact path="/playlists/:id" component={PlaylistShowView} />
           <Route exact path="/account/:id/votation" component={VotationView} />
         </Switch>
       </Router>
+    </ThemeProvider>
   )
 }
 
