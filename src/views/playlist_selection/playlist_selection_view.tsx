@@ -6,8 +6,10 @@ import { List } from './index'
 import { fetchPlaylists } from '../../features/slices/playlists_slice'
 import { RootState } from '../../features/root_reducer'
 import FullHeightSkeleton from '../full_height_skeleton'
+import { useRedirects } from '../../hooks'
 
 const PlaylistSelectionView = () => {
+  useRedirects().redirectBySpotifyUser()
   const playlists = useSelector((state: RootState) => state.playlists)
   const account = useSelector((state: RootState) => state.account)
   const dispatch = useDispatch()

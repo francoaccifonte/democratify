@@ -12,6 +12,7 @@ import {
   SignupView,
   PlaylistSelectionView,
   PlaylistShowView,
+  StreamingAuthorizationView,
   VotationView
 } from './views'
 
@@ -23,6 +24,7 @@ function App () {
         <Switch>
           <Route exact path="/login" component={LoginView} />
           <Route exact path="/signup" component={SignupView} />
+          <Route exact path="/register_users" component={StreamingAuthorizationView} />
           <Route exact path="/playlists" component={PlaylistSelectionView} />
           <Route exact path="/playlists/ongoing" component={OngoingPlaylistView} />
           <Route exact path="/playlists/:id" component={PlaylistShowView} />

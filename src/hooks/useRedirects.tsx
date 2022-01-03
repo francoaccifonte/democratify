@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../features/root_reducer'
 
 const useRedirects = () => {
@@ -8,7 +8,7 @@ const useRedirects = () => {
   const { status, spotifyUsers } = useSelector((state: RootState) => state.account)
 
   const redirectBySpotifyUser = () => {
-    if (status === 'fulfilled' && spotifyUsers?.length && spotifyUsers.length < 1) {
+    if (status === 'fulfilled' && spotifyUsers?.length === 0) {
       history.push('/register_users')
     }
   }
