@@ -24,7 +24,7 @@ const AppHeader = (props: HeaderProps) => {
 
   return (
     <div className={props.classes.container}>
-      <div >
+      <div className={props.classes.brand}>
         <Logo className={props.classes.logo} onClick={() => history.push('/')}/>
         <Text type="header" color="white">Rokolify</Text>
       </div>
@@ -58,7 +58,16 @@ const styles = (theme: any) => {
       fontSize: '4rem',
       composes: 'pe-4'
     },
+    brand: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
     logo: {
+      height: '4rem',
+      width: '4rem',
+      composes: 'm-3',
       '&:hover': {
         cursor: 'pointer'
       }
