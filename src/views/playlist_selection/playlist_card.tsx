@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import whithStyles, { useTheme } from 'react-jss'
+import { useTheme } from 'react-jss'
 
 type PlaylistCardProps = {
   id?: number;

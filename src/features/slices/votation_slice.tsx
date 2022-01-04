@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
 
-import { Votation } from '../../types/votation'
+import { Votation, Candidate } from '../../types/votation'
 import client from '../../backend/models/'
 
 export const fetchVotation = createAsyncThunk('votations/show',
@@ -22,7 +22,8 @@ export const castVote = createAsyncThunk('votations/castVote',
 
 type VotationState = {
   votation: Votation,
-  status: 'idle' | 'pending' | 'fulfilled' | 'rejected'
+  status: 'idle' | 'pending' | 'fulfilled' | 'rejected',
+  currentWinner?: Candidate,
 }
 
 const initialState: VotationState = {
@@ -42,6 +43,9 @@ export const votationsSlice = createSlice({
     builder.addCase(fetchVotation.fulfilled, (state, action) => {
       state.status = 'fulfilled'
       state.votation = action.payload
+      // find song with most votes
+      // TODO: Change any type for Candidate type
+      state.currentWinner = action.payload.votation_candidates.reduce((max: any, song: any) => max?.votes > song?.votes ? max : song)
     })
       .addCase(fetchVotation.rejected, (state, action) => {
         state.status = 'rejected'
