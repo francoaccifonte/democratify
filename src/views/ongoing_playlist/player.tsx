@@ -13,7 +13,7 @@ const Player = () => {
   const { ongoingPlaylist } = useOngoingPlaylist()
   const candidatePoolSize = ongoingPlaylist.candidatePoolSize
   const dispatch = useDispatch()
-  const image = ongoingPlaylist.playingSong?.cover_art[1].url
+  const image = ongoingPlaylist?.spotifyPlaylist?.cover_art_url
   return (
     <Container>
       <Image src={image} alt={'asdfg'} rounded fluid/>

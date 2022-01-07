@@ -1,3 +1,5 @@
+# docker build ./ --rm -t accifontefranco/democratify:latest && docker push accifontefranco/democratify:latest
+
 # docker build ./ --rm -t accifontefranco/democratify:latest
 # docker push accifontefranco/democratify:latest
 

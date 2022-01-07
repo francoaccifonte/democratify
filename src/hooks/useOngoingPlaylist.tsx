@@ -9,15 +9,19 @@ const useOngoingPlaylist = () => {
 
   let ongoingPlaylist = useSelector((state: RootState) => state.currentPlaylist)
 
-  useEffect(() => {
-    if (!ongoingPlaylist.id && ongoingPlaylist.status === 'idle') {
-      dispatch(fetchOngoingPlaylist({}))
-    }
-  }, [dispatch, ongoingPlaylist])
+  if (!ongoingPlaylist.id && ongoingPlaylist.status === 'idle') {
+    dispatch(fetchOngoingPlaylist({}))
+  }
 
   ongoingPlaylist = useSelector((state: RootState) => state.currentPlaylist)
+
+  const reloadOngoingPlaylist = () => {
+    dispatch(fetchOngoingPlaylist({}))
+  }
+
   return {
     ongoingPlaylist,
+    reloadOngoingPlaylist,
     startPlaylist
   }
 }

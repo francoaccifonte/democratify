@@ -9,7 +9,6 @@ type StreamingAuthorizationViewProps = {
 }
 const StreamingAuthorizationView = (props: StreamingAuthorizationViewProps) => {
   const { classes } = props
-  console.log(props)
   return (
     <FullHeightSkeleton header palette='admin' overflowY="hidden">
       <div className={classes.container}>

@@ -32,6 +32,7 @@ type CurrentPlaylistState = {
   playingSong: Song | undefined,
   votingSongs: Song[],
   remainingSongs: Song[],
+  spotifyPlaylist?: any
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected'
 }
 
@@ -42,6 +43,7 @@ const initialState: CurrentPlaylistState = {
   votingSongs: [],
   remainingSongs: [],
   playingSong: undefined,
+  spotifyPlaylist: undefined,
   status: 'idle'
 }
 
@@ -64,6 +66,7 @@ export const currentPlaylistSlice = createSlice({
       state.playingSong = action.payload.playing_song
       state.votingSongs = action.payload.voting_songs
       state.remainingSongs = action.payload.remaining_songs
+      state.spotifyPlaylist = action.payload.spotify_playlist
     })
       .addCase(fetchOngoingPlaylist.pending, (state, action) => {
         state.status = 'pending'

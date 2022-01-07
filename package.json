@@ -22,6 +22,7 @@
     "@types/react-router": "^5.1.17",
     "@types/react-router-dom": "^5.3.1",
     "@types/redux": "^3.6.0",
+    "eslint-config-standard-with-typescript": "^21.0.1",
     "faker": "^5.5.3",
     "jss": "^10.9.0",
     "moment": "^2.29.1",
@@ -40,7 +41,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .ts,.tsx --fix ."
@@ -65,13 +66,13 @@
   },
   "devDependencies": {
     "@types/faker": "^5.5.9",
-    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^5.8.1",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-react": "^7.28.0"
   }
 }

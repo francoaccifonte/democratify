@@ -20,7 +20,6 @@ type HeaderProps = {
 const AppHeader = (props: HeaderProps) => {
   const history = useHistory()
   const { userIsLoggedIn } = useRedirects()
-  console.log(userIsLoggedIn())
 
   return (
     <div className={props.classes.container}>

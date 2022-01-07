@@ -3,7 +3,8 @@ export default abstract class BaseModel {
   token: string | undefined;
 
   constructor (token?: string) {
-    this.baseUrl = 'http://localhost:3001'
+    this.baseUrl = 'http://rockolify.click:3001'
+    // this.baseUrl = 'http://localhost:3001'
     this.token = token
   }
 

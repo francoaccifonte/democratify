@@ -10,11 +10,9 @@ const useVotation = (accountId?: number, token?: string) => {
   let votationState = useSelector((state: RootState) => state.votations)
   const previousVotationIds = localStorage.getItem('votation_ids')?.split(',') || []
 
-  useEffect(() => {
-    if (!votationState.votation.id && votationState.status === 'idle' && accountId !== undefined) {
-      dispatch(fetchVotation({ id: accountId, token: token }))
-    }
-  }, [dispatch, votationState, accountId, token])
+  if (!votationState.votation.id && votationState.status === 'idle' && accountId !== undefined) {
+    dispatch(fetchVotation({ id: accountId, token: token }))
+  }
 
   votationState = useSelector((state: RootState) => state.votations)
 
