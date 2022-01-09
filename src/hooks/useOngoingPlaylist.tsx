@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../features/root_reducer'
 import { startOngoingPlaylist, fetchOngoingPlaylist } from '../features/slices/current_playlist_slice'
-import { useEffect } from 'react'
 
 const useOngoingPlaylist = () => {
   const dispatch = useDispatch()

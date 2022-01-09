@@ -1,4 +1,4 @@
-<svg width="512" height="512" version="1.1" viewBox="0 0 135.47 135.47" xmlns="http://www.w3.org/2000/svg" xmlnsCc="http://creativecommons.org/ns#" xmlnsDc="http://purl.org/dc/elements/1.1/" xmlnsRdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<svg width="512" height="512" version="1.1" viewBox="0 0 135.47 135.47" xmlns="http://www.w3.org/2000/svg" xmlnscc="http://creativecommons.org/ns#" xmlnsdc="http://purl.org/dc/elements/1.1/" xmlnsrdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
  <defs>
   <filter id="filter875" x="-.00012561" y="-7.9271e-5" width="1.0003" height="1.0002" style="color-interpolation-filters:sRGB">
    <feGaussianBlur stdDeviation="0.004474385"/>
@@ -9,9 +9,9 @@
  </defs>
  <metadata>
   <rdfRDF>
-   <ccWork rdfAbout="">
+   <ccWork rdfabout="">
     <dcFormat>image/svg+xml</dcFormat>
-    <dcType rdfResource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dcType rdfresource="http://purl.org/dc/dcmitype/StillImage"/>
     <dcTitle/>
    </ccWork>
   </rdfRDF>

@@ -6,11 +6,13 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import moment from 'moment'
+import { ThemeProvider } from 'react-jss'
 
 import Text from '../components/text'
 import { useVotation } from '../../hooks'
 import CandidateElement from './candidate_item'
 import FullHeigthSkeleton from '../full_height_skeleton'
+import { userPalette } from '../../color_palette'
 
 type TParams = { id: string };
 
@@ -19,12 +21,12 @@ const VotationView = ({ match }: RouteComponentProps<TParams>) => {
   const { votationState, voteForCandidate, previousVotationIds } = useVotation(accountId, 'asdf')
   const [selected, setSelected] = useState<number|undefined>(undefined)
 
+  const voteAlreadyCasted = previousVotationIds.includes(String(votationState.votation.id))
+
   const handleVote = (id: number) => voteForCandidate(id)
   const handleSelectCandidate = (id: number) => {
-    setSelected(id)
+    if (!voteAlreadyCasted) { setSelected(id) }
   }
-
-  const voteAlreadyCasted = previousVotationIds.includes(String(votationState.votation.id))
 
   if (!votationState.votation.id && !['idle', 'pending'].includes(votationState.status)) {
     return <div>No hay una playlist en curso</div>
@@ -51,7 +53,7 @@ const VotationView = ({ match }: RouteComponentProps<TParams>) => {
       return (
         <Container fluid>
           <Row>
-            <Button className="mb-3 mt-3" onClick={() => handleVote(selected)}>Votar</Button>
+            <Button className="mb-3 mt-3" onClick={() => handleVote(selected)} style={{ backgroundColor: userPalette.Info, borderColor: userPalette.Info }}>Votar</Button>
           </Row>
         </Container>
       )
@@ -74,11 +76,13 @@ const VotationView = ({ match }: RouteComponentProps<TParams>) => {
   if (candidates === []) { return <div>No hay candidatas</div> }
 
   return (
-    <FullHeigthSkeleton header palette='user' flexDirectionColumn overflowY="hidden">
-      <VotationTimer />
-      <Candidates />
-      <VoteButton />
-    </FullHeigthSkeleton>
+    <ThemeProvider theme={userPalette}>
+      <FullHeigthSkeleton header palette='user' flexDirectionColumn overflowY="hidden">
+        <VotationTimer />
+        <Candidates />
+        <VoteButton />
+      </FullHeigthSkeleton>
+    </ThemeProvider>
   )
 }
 

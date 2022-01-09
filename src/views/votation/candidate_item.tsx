@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { Candidate } from '../../types/votation'
+import Text from '../components/text'
 
 type CandidateElementProps = {
   data: Candidate,
@@ -19,7 +20,7 @@ const CandidateElement = (props: CandidateElementProps) => {
   const backgroundColor = props.disabled
     ? '#3CA1FF'
     : isSelected
-      ? '#3CA1FF'
+      ? '#0B65B8'
       : '#E782D1'
   return (
 
@@ -30,9 +31,8 @@ const CandidateElement = (props: CandidateElementProps) => {
         </Col>
         <Col xs={8}>
           <Container>
-            <Row className="text-truncate">{props.data.spotify_song?.title}</Row>
-            <Row className="text-truncate">{props.data.spotify_song?.artist}</Row>
-            <Row className="text-truncate">{props.data.spotify_song?.album}</Row>
+            <Row className="text-truncate"><Text type="bodyImportant" color="black">{props.data.spotify_song?.title}</Text></Row>
+            <Row className="text-truncate"><Text type="bodyImportant" color="black">{props.data.spotify_song?.artist}</Text></Row>
           </Container>
         </Col>
       </Row>

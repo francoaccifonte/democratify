@@ -29,6 +29,13 @@ const Text = (props: TextProps) => {
     fontSize: '1.125rem',
     lineHeight: '1.75rem'
   }
+  const bodyImportantStyle = {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '1.5rem',
+    lineHeight: '2.25rem'
+  }
   const bodyCaptionStyle = {
     fontFamily: 'Poppins',
     fontStyle: 'normal',
@@ -58,6 +65,9 @@ const Text = (props: TextProps) => {
       break
     case 'bodyRegular':
       style = bodyRegularStyle
+      break
+    case 'bodyImportant':
+      style = bodyImportantStyle
       break
     case 'bodyCaption':
       style = bodyCaptionStyle

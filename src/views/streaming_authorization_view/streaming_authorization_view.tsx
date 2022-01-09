@@ -3,6 +3,7 @@ import withStyles from 'react-jss'
 
 import FullHeightSkeleton from '../full_height_skeleton'
 import StreamingCard from './streaming_card'
+import Text from '../components/text'
 
 type StreamingAuthorizationViewProps = {
   classes: any
@@ -10,7 +11,8 @@ type StreamingAuthorizationViewProps = {
 const StreamingAuthorizationView = (props: StreamingAuthorizationViewProps) => {
   const { classes } = props
   return (
-    <FullHeightSkeleton header palette='admin' overflowY="hidden">
+    <FullHeightSkeleton flexDirectionColumn={true} header palette='admin' overflowY="hidden">
+      <div className={classes.caption}><Text type="bodyRegular" color="White">Enlaza tu cuenta de Streaming</Text></div>
       <div className={classes.container}>
         <StreamingCard service="Spotify"/>
         <StreamingCard service="Youtube"/>
@@ -26,8 +28,13 @@ const styles = (theme: any) => {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-around',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       composes: 'mt-5'
+    },
+    caption: {
+      width: '100%',
+      textAlign: 'center',
+      composes: 'pt-5'
     }
   }
 }
