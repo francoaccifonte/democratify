@@ -23,16 +23,17 @@ const OngoingPlaylistView = () => {
       , 3000)
       return () => clearInterval(interval)
     }
-  }, [votationState])
+  }, [votationState.status, votationState.votation.id])
 
-  useEffect(() => {
-    if (ongoingPlaylist.status === 'fulfilled' && ongoingPlaylist.id) {
-      const interval2 = setInterval(() => {
-        reloadOngoingPlaylist()
-      }, 3000)
-      return () => clearInterval(interval2)
-    }
-  }, [ongoingPlaylist.id, ongoingPlaylist.status])
+  // TODO: this should be timed for the ending of the votation
+  // useEffect(() => {
+  //   if (ongoingPlaylist.status === 'fulfilled' && ongoingPlaylist.id) {
+  //     const interval2 = setInterval(() => {
+  //       reloadOngoingPlaylist()
+  //     }, 3000)
+  //     return () => clearInterval(interval2)
+  //   }
+  // }, [ongoingPlaylist.id, ongoingPlaylist.status])
 
   if (!account.id && ['rejected', 'fullfilled'].includes(account.status)) {
     history.push('/login')

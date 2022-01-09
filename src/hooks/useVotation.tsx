@@ -1,30 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../features/root_reducer'
 import { fetchVotation, castVote } from '../features/slices/votation_slice'
-import { useEffect } from 'react'
 
 const useVotation = (accountId?: number, token?: string) => {
   const dispatch = useDispatch()
-  accountId = accountId || useSelector((state: RootState) => state.account.id)
+  const satateAccountId = useSelector((state: RootState) => state.account.id)
+  const usableAccountId = accountId || satateAccountId
 
-  let votationState = useSelector((state: RootState) => state.votations)
+  const votationState = useSelector((state: RootState) => state.votations)
   const previousVotationIds = localStorage.getItem('votation_ids')?.split(',') || []
 
-  if (!votationState.votation.id && votationState.status === 'idle' && accountId !== undefined) {
-    dispatch(fetchVotation({ id: accountId, token: token }))
-  }
-
-  votationState = useSelector((state: RootState) => state.votations)
-
-  const voteForCandidate = (candidateId: number) => {
-    if (accountId !== undefined) {
-      dispatch(castVote({ accountId: accountId, token: token, candidateId: candidateId }))
+  const reloadVotation = () => {
+    if (usableAccountId !== undefined) {
+      dispatch(fetchVotation({ id: usableAccountId, token: token }))
     }
   }
 
-  const reloadVotation = () => {
-    if (accountId !== undefined) {
-      dispatch(fetchVotation({ id: accountId, token: token }))
+  if (!votationState.votation.id && votationState.status === 'idle') {
+    reloadVotation()
+  }
+
+  const voteForCandidate = (candidateId: number) => {
+    if (usableAccountId !== undefined) {
+      dispatch(castVote({ accountId: usableAccountId, token: token, candidateId: candidateId }))
     }
   }
 
