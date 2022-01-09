@@ -5,6 +5,7 @@ type TextProps = {
   color?: string;
   children: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
 const Text = (props: TextProps) => {
@@ -78,7 +79,7 @@ const Text = (props: TextProps) => {
   }
   style.color = props.color
 
-  return <span style={style} onClick={props.onClick}>{props.children}</span>
+  return <span className ={props.className} style={style} onClick={props.onClick}>{props.children}</span>
 }
 
 export default Text
