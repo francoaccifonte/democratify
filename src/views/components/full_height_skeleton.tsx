@@ -1,10 +1,10 @@
 import React from 'react'
-import BackgroundContainer from './components/background_container'
-import AppHeader from './components/app_header'
-import PlayerFooter from './components/player_footer'
+import BackgroundContainer from './background_container'
+import AppHeader from './app_header'
+import PlayerFooter from './player_footer'
 import Container from 'react-bootstrap/Container'
 
-import { ColorProps } from '../color_palette'
+import { ColorProps } from '../../color_palette'
 
 type SkeletonProps = {
   header?: boolean;

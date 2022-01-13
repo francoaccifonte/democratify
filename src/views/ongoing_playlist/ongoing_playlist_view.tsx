@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 
 import Player from './player'
 import SongList from './song_list'
-import FullHeightSkeleton from '../full_height_skeleton'
+import { FullHeightSkeleton } from '../components'
 import { RootState } from '../../features/root_reducer'
 import { useVotation, useOngoingPlaylist } from '../../hooks'
 

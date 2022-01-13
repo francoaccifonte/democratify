@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FullHeightSkeleton from '../full_height_skeleton'
+import { FullHeightSkeleton } from '../components'
 import { SignupCard, SignupSuccessCard } from '.'
 import useAuth from '../../hooks/useAuth'
 

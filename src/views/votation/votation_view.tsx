@@ -11,7 +11,7 @@ import { ThemeProvider } from 'react-jss'
 import Text from '../components/text'
 import { useVotation } from '../../hooks'
 import CandidateElement from './candidate_item'
-import FullHeigthSkeleton from '../full_height_skeleton'
+import { FullHeightSkeleton } from '../components'
 import { userPalette } from '../../color_palette'
 
 type TParams = { id: string };
@@ -77,11 +77,11 @@ const VotationView = ({ match }: RouteComponentProps<TParams>) => {
 
   return (
     <ThemeProvider theme={userPalette}>
-      <FullHeigthSkeleton header palette='user' flexDirectionColumn overflowY="hidden">
+      <FullHeightSkeleton header palette='user' flexDirectionColumn overflowY="hidden">
         <VotationTimer />
         <Candidates />
         <VoteButton />
-      </FullHeigthSkeleton>
+      </FullHeightSkeleton>
     </ThemeProvider>
   )
 }

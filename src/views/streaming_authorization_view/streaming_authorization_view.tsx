@@ -1,7 +1,7 @@
 import React from 'react'
 import withStyles from 'react-jss'
 
-import FullHeightSkeleton from '../full_height_skeleton'
+import { FullHeightSkeleton } from '../components'
 import StreamingCard from './streaming_card'
 import Text from '../components/text'
 

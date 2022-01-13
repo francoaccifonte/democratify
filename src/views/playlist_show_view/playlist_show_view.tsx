@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 
 import { useRedirects, usePlaylist, useOngoingPlaylist } from '../../hooks'
-import FullHeightSkeleton from '../full_height_skeleton'
+import { FullHeightSkeleton } from '../components'
 
 type TParams = { id: string };
 
