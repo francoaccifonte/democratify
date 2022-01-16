@@ -5,6 +5,7 @@ type TextProps = {
   color?: string;
   children: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
 const Text = (props: TextProps) => {
@@ -28,6 +29,13 @@ const Text = (props: TextProps) => {
     fontWeight: '400',
     fontSize: '1.125rem',
     lineHeight: '1.75rem'
+  }
+  const bodyImportantStyle = {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '1.5rem',
+    lineHeight: '2.25rem'
   }
   const bodyCaptionStyle = {
     fontFamily: 'Poppins',
@@ -59,6 +67,9 @@ const Text = (props: TextProps) => {
     case 'bodyRegular':
       style = bodyRegularStyle
       break
+    case 'bodyImportant':
+      style = bodyImportantStyle
+      break
     case 'bodyCaption':
       style = bodyCaptionStyle
       break
@@ -68,7 +79,7 @@ const Text = (props: TextProps) => {
   }
   style.color = props.color
 
-  return <span style={style} onClick={props.onClick}>{props.children}</span>
+  return <span className ={props.className} style={style} onClick={props.onClick}>{props.children}</span>
 }
 
 export default Text

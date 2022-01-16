@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { List } from './index'
 import { fetchPlaylists } from '../../features/slices/playlists_slice'
 import { RootState } from '../../features/root_reducer'
-import FullHeightSkeleton from '../full_height_skeleton'
+import { FullHeightSkeleton } from '../components'
 import { useRedirects } from '../../hooks'
 
 const PlaylistSelectionView = () => {

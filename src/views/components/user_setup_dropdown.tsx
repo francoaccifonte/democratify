@@ -3,6 +3,10 @@ import { useHistory } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import withStyles from 'react-jss'
 import Dropdown from 'react-bootstrap/Dropdown'
+import { useSelector } from 'react-redux'
+
+import { openQrOnNewWindow } from './qr'
+import { RootState } from '../../features/root_reducer'
 
 type UserSetupDropdownProps = {
   classes: any
@@ -16,6 +20,7 @@ const UserSetupDropdown = (props: UserSetupDropdownProps) => {
     localStorage.removeItem('account_token')
     history.push('/')
   }
+  const accountId = useSelector((state: RootState) => state.account.id)
 
   type FarafaProps = { children: any, onClick: any }
   const Farafa = React.forwardRef((props: FarafaProps, ref: any) => (
@@ -46,6 +51,7 @@ const UserSetupDropdown = (props: UserSetupDropdownProps) => {
           <Dropdown.Item onClick={() => history.push('/register_users')}>Configuracion de Streaming</Dropdown.Item>
           <Dropdown.Item onClick={() => history.push('/playlists')}>Mis Playlists</Dropdown.Item>
           <Dropdown.Item onClick={() => history.push('/playlists/ongoing')}>Reproduccion Activa</Dropdown.Item>
+          <Dropdown.Item onClick={() => openQrOnNewWindow(accountId)}>QR Votacion</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item onClick={handleLogout}>Salir</Dropdown.Item>
         </Dropdown.Menu>

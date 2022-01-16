@@ -16,13 +16,14 @@ const SpotifyLoginButton = (props: SpotifyLoginButtonProps) => {
   const account = useSelector((state: RootState) => state.account)
   const state = account.id
   const scopes = ['user-read-email', 'playlist-read-private', 'playlist-read-collaborative', 'user-read-playback-state', 'user-modify-playback-state', 'user-read-currently-playing']
+  // const redirectUri = 'http://localhost:3001/spotify_login'
+  const redirectUri = 'http://rockolify.click:3001/spotify_login'
   const loginURI = 'https://accounts.spotify.com/authorize?' +
   'response_type=code&' +
   'client_id=9d48abfbbf194adc9051e1b82b0ecdb0&' +
   `scope=${scopes.join('%20')}&` +
-  'redirect_uri=http://localhost:3001/spotify_login&' +
-  `state=${state
-  }`
+  `redirect_uri=${redirectUri}&` +
+  `state=${state}`
 
   const { status, spotifyUsers } = useSelector((state: RootState) => state.account)
   const alreadyLinked = (status === 'fulfilled' && spotifyUsers?.length !== 0)
