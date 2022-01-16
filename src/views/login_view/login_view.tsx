@@ -11,7 +11,7 @@ import { RootState } from '../../features/root_reducer'
 import useAuth from '../../hooks/useAuth'
 import Text from '../components/text'
 import LoadingSpinner from '../components/loading_spinner'
-import FullHeightSkeleton from '../full_height_skeleton'
+import { FullHeightSkeleton } from '../components/'
 
 const styles = (theme: any) => {
   return {
